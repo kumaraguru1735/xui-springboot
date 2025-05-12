@@ -1,0 +1,178 @@
+<div th:fragment="navbar" class="topbar-menu">
+  <div class="container-fluid">
+    <div id="navigation">
+      <ul class="navigation-menu">
+        <li class="has-submenu">
+          <a href="index"><i class="fe-activity"></i>Dashboard <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li><a href="live_connections">Live Connections</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"><i class="fas fa-server"></i>Servers <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li><a href="servers">Manage Servers</a></li>
+            <li><a href="proxies">Manage Proxies</a></li>
+            <li><a href="server_order">Server Order</a></li>
+            <li><a href="process_monitor">Process Monitor</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"> <i class="fas fa-users"></i>Users <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li><a href="user">Add User</a></li>
+            <li><a href="users">Manage Users</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"> <i class="fas fa-desktop"></i>Lines <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li class="has-submenu">
+              <a href="#">User Lines <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="line">Add Line</a></li>
+                <li><a href="lines">Manage Lines</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">MAG Devices <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="mag">Add MAG Device</a></li>
+                <li><a href="mags">Manage MAG Devices</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Enigma Devices <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="enigma">Add Enigma Device</a></li>
+                <li><a href="enigmas">Manage Enigma Devices</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"> <i class="fas fa-play"></i>Content <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li class="has-submenu">
+              <a href="#">Streams <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="stream">Add Stream</a></li>
+                <li><a href="stream?import=1">Import Multiple</a></li>
+                <li><a href="review?type=1">Import & Review</a></li>
+                <li><a href="streams">Manage Streams</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Created Channels <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="created_channel">Create Channel</a></li>
+                <li><a href="created_channels">Manage Channels</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Movies <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="movie">Add Movie</a></li>
+                <li><a href="movie?import=1">Import Multiple</a></li>
+                <li><a href="review?type=2">Import & Review</a></li>
+                <li><a href="movies">Manage Movies</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Series <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="serie">Add Series</a></li>
+                <li><a href="series">Manage Series</a></li>
+                <li><a href="episodes">Manage Episodes</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Stations <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="radio">Add Station</a></li>
+                <li><a href="radios">Manage Stations</a></li>
+              </ul>
+            </li>
+            <li><a href="archive">Recordings</a></li>
+            <li><a href="epg_view">TV Guide</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"> <i class="fas fa-spa"></i>Bouquets <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li><a href="bouquet">Add Bouquet</a></li>
+            <li><a href="bouquets">Manage Bouquets</a></li>
+            <li><a href="bouquet_order">Order Bouquets</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#"> <i class="fas fa-wrench"></i>Management <div class="arrow-down"></div></a>
+          <ul class="submenu">
+            <li class="has-submenu">
+              <a href="#">Service Setup <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="stream_categories">Categories</a></li>
+                <li><a href="epgs">EPG's</a></li>
+                <li><a href="groups">Groups</a></li>
+                <li><a href="packages">Packages</a></li>
+                <li><a href="providers">Stream Providers</a></li>
+                <li><a href="profiles">Transcode Profiles</a></li>
+                <li><a href="plex">Plex Sync</a></li>
+                <li><a href="watch">Watch Folder</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Access Control <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="codes">Access Codes</a></li>
+                <li><a href="asns">Blocked ASN's</a></li>
+                <li><a href="ips">Blocked IP's</a></li>
+                <li><a href="isps">Blocked ISP's</a></li>
+                <li><a href="useragents">Blocked User Agents</a></li>
+                <li><a href="hmacs">HMAC Keys</a></li>
+                <li><a href="rtmp_ips">RTMP IP's</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Tools <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="channel_order">Channel Order</a></li>
+                <li><a href="fingerprint">Fingerprint</a></li>
+                <li><a href="mass_delete">Mass Delete</a></li>
+                <li><a href="quick_tools">Quick Tools</a></li>
+                <li><a href="rtmp_monitor">RTMP Monitor</a></li>
+                <li><a href="stream_tools">Stream Tools</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Mass Edit <div class="arrow-down"></div></a>
+              <ul class="submenu">
+                <li><a href="created_channel_mass">Created Channels</a></li>
+                <li><a href="enigma_mass">Enigma Devices</a></li>
+                <li><a href="episodes_mass">Episodes</a></li>
+                <li><a href="line_mass">Lines</a></li>
+                <li><a href="mag_mass">MAG Devices</a></li>
+                <li><a href="movie_mass">Movies</a></li>
+                <li><a href="series_mass">Series</a></li>
+                <li><a href="radio_mass">Stations</a></li>
+                <li><a href="stream_mass">Streams</a></li>
+                <li><a href="stream_review">Stream Review</a></li>
+                <li><a href="user_mass">Users</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#">Logs <div class="arrow-down"></div></a>
+              <ul class="submenu megamenu">
+                <li>
+                  <ul>
+                    <li><a href="line_activity">Activity Logs</a></li><li><a href="client_logs">Client Logs</a></li><li><a href="credit_logs">Credit Logs</a></li><li><a href="queue">Encoding Queue</a></li><li><a href="line_ips">IP's per Line</a></li><li><a href="live_connections">Live Connections</a></li><li><a href="login_logs">Login Logs</a></li><li><a href="mag_events">MAG Event Logs</a></li><li><a href="ondemand">On-Demand Scanner</a></li></ul></li><li><ul><li><a href="panel_logs">Panel Errors</a></li><li><a href="user_logs">Reseller Logs</a></li><li><a href="restream_logs">Restream Detection</a></li><li><a href="stream_errors">Stream Errors</a></li><li><a href="stream_rank">Stream Rank</a></li><li><a href="mysql_syslog">System Logs</a></li><li><a href="theft_detection">VOD Theft Detection</a></li><li><a href="watch_output">Watch Folder Logs</a></li>                                                </ul>
+              </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

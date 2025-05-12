@@ -1,0 +1,299 @@
+<div th:fragment="top-navbar" class="navbar-custom">
+    <div class="container-fluid">
+        <div class="logo-box">
+            <a th:href="@{/dashboard}" class="logo text-center">
+                            <span class="logo-lg">
+                                <img th:src="@{assets/images/logo-topbar.png}" alt="" height="26">
+                            </span>
+                <span class="logo-sm">
+                                <img th:src="@{assets/images/logo-topbar.png}" alt="" height="28">
+                            </span>
+            </a>
+        </div>
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0" style="opacity: 80%" id="header_stats">
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect pd-left pd-right" data-toggle="dropdown" href="./live_connections" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="pro-user-name text-white ml-1">
+                                    <i class="fe-zap text-white"></i> &nbsp; <button type="button" class="btn btn-dark bg-animate btn-xs waves-effect waves-light no-border"><span id="header_connections">0</span></button>
+                                </span>
+                </a>
+            </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect pd-left pd-right" data-toggle="dropdown" href="./live_connections" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="pro-user-name text-white ml-1">
+                                    <i class="fe-users text-white"></i> &nbsp; <button type="button" class="btn btn-dark bg-animate btn-xs waves-effect waves-light no-border"><span id="header_users">0</span></button>
+                                </span>
+                </a>
+            </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect pd-left pd-right" data-toggle="dropdown" href="./streams" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="pro-user-name text-white ml-1">
+                                    <i class="fe-play text-white"></i> &nbsp; <button type="button" class="btn btn-dark bg-animate btn-xs waves-effect waves-light no-border"><span id="header_streams_up">0</span> <i class="mdi mdi-arrow-up-thick"></i> &nbsp; <span id="header_streams_down">0</span> <i class="mdi mdi-arrow-down-thick"></i></button>
+                                </span>
+                </a>
+            </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect pd-left pd-right" data-toggle="dropdown" href="./dashboard" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="pro-user-name text-white ml-1">
+                                    <i class="fe-trending-up text-white"></i> &nbsp; <button type="button" class="btn btn-dark bg-animate btn-xs waves-effect waves-light no-border"><span id="header_network_up">0</span> <small>Mbps</small> <i class="mdi mdi-arrow-up-thick"></i> &nbsp; <span id="header_network_down">0</span> <small>Mbps</small> <i class="mdi mdi-arrow-down-thick"></i></button>
+                                </span>
+                </a>
+            </li>
+        </ul>
+        <!-- Streams, Channels, Movies, Episodes & Radio Stations -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_streams" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_streams_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('start');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-play"></i></button>
+                                        <button type="button" onClick="multiAPI('stop');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-stop"></i></button>
+                                        <button type="button" onClick="multiAPI('restart');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-refresh"></i></button>
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- TV Series -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_series" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_series_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- Servers -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_servers" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_servers_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('tools');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-creation"></i></button>
+                                        <button type="button" onClick="multiAPI('restart');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-refresh"></i></button>
+                                        <button type="button" onClick="multiAPI('start');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-play"></i></button>
+                                        <button type="button" onClick="multiAPI('stop');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-stop"></i></button>
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-shield-check-outline text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('enable_proxy');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                        <button type="button" onClick="multiAPI('disable_proxy');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-access-point-network text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- Proxies -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_proxies" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_proxies_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('tools');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-creation"></i></button>
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-trash-can-outline"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-shield-check-outline text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- Lines -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_lines" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_lines_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-lock text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('ban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">ban</button>
+                                        <button type="button" onClick="multiAPI('unban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">unban</button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-power text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- Enigma Devices -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_enigmas" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_enigmas_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('convert');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="fas fa-retweet"></i></button>
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-lock text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('ban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">ban</button>
+                                        <button type="button" onClick="multiAPI('unban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">unban</button>
+                                    </div>
+                                    &nbsnbsp; <i class="mdi mdi-power text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- MAG Devices -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_mags" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_mags_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('event');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-message-alert"></i></button>
+                                        <button type="button" onClick="multiAPI('convert');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="fas fa-retweet"></i></button>
+                                        <button type="button" onClick="multiAPI('purge');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-hammer"></i></button>
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-lock text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('ban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">ban</button>
+                                        <button type="button" onClick="multiAPI('unban');" class="btn btn-primary btn-xs waves-effect waves-light no-border">unban</button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-power text-white"></i> &nbspnbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <!-- Users -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0 multiselect" id="multiselect_users" style="display: none;opacity: 80%;">
+            <li class="dropdown notification-list">
+                            <span class="nav-link nav-user mr-0 waves-effect pd-left pd-right">
+                                <span class="pro-user-name text-white ml-1">
+                                    <button type="button" class="btn btn-primary btn-xs waves-effect waves-light no-border"><span id="multi_users_selected">0</span></button> &nbsp; <i onClick="multiAPI('clear');" class="mdi mdi-selection-off text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('delete');" class="btn btn-primary btn-xs waves-effect waves-light no-border"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    &nbsp; <i class="mdi mdi-lock text-white"></i> &nbsp;
+                                    <div class="btn-group">
+                                        <button type="button" onClick="multiAPI('disable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">disable</button>
+                                        <button type="button" onClick="multiAPI('enable');" class="btn btn-primary btn-xs waves-effect waves-light no-border">enable</button>
+                                    </div>
+                                </span>
+                            </span>
+            </li>
+        </ul>
+        <ul class="list-unstyled topnav-menu float-right mb-0 topnav-custom">
+            <li class="dropdown notification-list">
+                <a class="navbar-toggle nav-link">
+                    <div class="lines text-white">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </li>
+            <li class="dropdown notification-list" id="search-mobile">
+                <a href="javascript:void(0);" class="search-toggle pad-15 nav-link right-bar-toggle waves-effect text-white">
+                    <i class="mdi mdi-magnify noti-icon"></i>
+                </a>
+            </li>
+            <li class="d-none d-sm-block" id="topnav-search">
+                <div class="app-search" data-theme="bg-animate">
+                    <div class="app-search-box">
+                        <select placeholder="Search..." class="quick_search form-control bg-animate" data-toggle="select2"></select>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="pro-user-name text-white ml-1">
+                                    ctndigital@gmail.com <i class="mdi mdi-chevron-down"></i>
+                                </span>
+                    <span class="pro-user-name-mob nav-link text-white waves-effect">
+                                    <i class="fe-user noti-icon"></i>
+                                </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <a th:href="@{/edit_profile}" class="dropdown-item notify-item">
+                        <span>User Profile</span>
+                    </a>
+                    <a th:href="@{/settings}" class="dropdown-item notify-item">
+                        <span>General Settings</span>
+                    </a>
+                    <a th:href="@{/backups}" class="dropdown-item notify-item">
+                        <span>Backup Settings</span>
+                    </a>
+                    <a th:href="@{/cache}" class="dropdown-item notify-item">
+                        <span>Cache & Redis</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a th:href="@{/settings_plex}" class="dropdown-item notify-item">
+                        <span>Plex Settings</span>
+                    </a>
+                    <a th:href="@{/settings_watch}" class="dropdown-item notify-item">
+                        <span>Watch Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a th:href="@{/license_info}" class="dropdown-item notify-item">
+                        <span>License Info</span>
+                    </a>
+                    <a href="https://xui.one/billing/index.php?rp=/knowledgebase" class="dropdown-item notify-item">
+                        <span>XUI Knowledgebase</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a th:href="@{/logout}" class="dropdown-item notify-item">
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+            <li class="dropdown notification-list">
+                <a class="nav-link waves-effect text-white" th:href="@{/tickets}" role="button">
+                    <i class="fe-mail noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                    <div class="dropdown-item noti-title">
+                        <h5 class="m-0">
+                            Tickets
+                        </h5>
+                    </div>
+                    <div class="slimscroll noti-scroll">
+                    </div>
+                    <a th:href="@{/tickets}" class="dropdown-item text-center text-primary notify-item notify-all">
+                        View Tickets
+                        <i class="fi-arrow-right"></i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>

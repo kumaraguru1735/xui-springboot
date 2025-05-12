@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/default">
+<head lang="en" th:replace="~{fragments/header :: header }"> </head>
+<body>
+<header id="topnav">
+    <div class="navbar-overlay bg-animate"></div>
+    <div th:replace="~{fragments/topnavbar :: top-navbar }"></div>
+    <div th:replace="~{fragments/navbar :: navbar }"></div>
+</header>
+<div id="status">
+    <div class="spinner"></div>
+</div>
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0" style="width: 250px;">
+                            <select id="server_id" class="form-control">
+                                <option selected value="">All Servers</option>
+                                <option value="1">Main Server</option>
+                            </select>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">
+                        Dashboard</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <a href="./live_connections">                <div class="card cta-box bg-purple text-white">
+                    <div class="card-body active-connections">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-zap avatar-title font-22 text-purple"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span></h3>
+                                    <p class="text-white mb-1 text-truncate">Online Connections</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>            </div>
+            <div class="col-md-4">
+                <a href="./live_connections">                <div class="card cta-box bg-success text-white">
+                    <div class="card-body online-users">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-users avatar-title font-22 text-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span></h3>
+                                    <p class="text-white mb-1 text-truncate">Active Lines</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>            </div>
+            <div class="col-md-4">
+                <a href="./streams?filter=1">                <div class="card cta-box bg-info text-white">
+                    <div class="card-body active-streams">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-play avatar-title font-22 text-info"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span></h3>
+                                    <p class="text-white mb-1 text-truncate">Live Streams</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>            </div>
+            <div class="col-md-4">
+                <a href="./streams?filter=2">                <div class="card cta-box bg-pink text-white">
+                    <div class="card-body offline-streams">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-alert-triangle avatar-title font-22 text-pink"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span></h3>
+                                    <p class="text-white mb-1 text-truncate">Down Streams</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>            </div>
+            <div class="col-md-4">
+                <div class="card cta-box bg-primary text-white">
+                    <div class="card-body output-flow">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-trending-up avatar-title font-22 text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span> <small>Mbps</small></h3>
+                                    <p class="text-white mb-1 text-truncate">Network Output</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card cta-box bg-danger text-white">
+                    <div class="card-body input-flow">
+                        <div class="media align-items-center">
+                            <div class="col-3">
+                                <div class="avatar-sm bg-light">
+                                    <i class="fe-trending-down avatar-title font-22 text-danger"></i>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="text-right">
+                                    <h3 class="text-white my-1"><span data-plugin="counterup" class="entry">0</span> <small>Mbps</small></h3>
+                                    <p class="text-white mb-1 text-truncate">Network Input</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+            </div>
+            <div class="col-xl-6">
+                <div class="card" style="height: 390px; overflow:hidden;">
+                    <div class="card-body">
+                        <h4 class="header-title mb-4">Service Status</h4>
+                        <div style="max-height: 288px; overflow-y: scroll;">
+                            <div class="timeline-alt">
+                                <div class="timeline-item">
+                                    <i class="timeline-icon bg-warning"></i>
+                                    <div class="timeline-item-info">
+                                        <a href="javascript:void(0);" class="text-body font-weight-semibold mb-1 d-block bg"><strong>Database Incomplete</strong></a>
+                                        <small>Your database is outdated, please run <strong>/home/xui/status</strong> as root user to update your tables.</small><br/>
+                                        <p><br/></p>
+                                    </div>
+                                </div>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-0">CPU & Memory</h4>
+                        <div id="cpu_chart-col" class="pt-3 show" dir="ltr">
+                            <div id="cpu_chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-0">Network Traffic</h4>
+                        <div id="network_chart-col" class="pt-3 show" dir="ltr">
+                            <div id="network_chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-0">Connections</h4>
+                        <div id="connections_chart-col" class="pt-3 show" dir="ltr">
+                            <div id="connections_chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12">
+                <a href="./server_view?id=1">
+                    <div class="card-header bg-purple py-3 text-white">
+                        <div class="float-right">
+                            <i class="mdi mdi-chart-line"></i>
+                        </div>
+                        <h5 class="card-title mb-0 text-white">Main Server<br/><small>Main Server</small></h5>
+                    </div>
+                </a>
+                <div class="card-header no-margin-bottom py-3 text-white bg-white">
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Connections</h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <a href="live_connections?server=1"><button id="s_1_conns" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button></a>
+                        </div>
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Users</h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <a href="live_connections?server=1"><button id="s_1_users" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button></a>
+                        </div>
+                        <div class="col-md-4 col-4">
+                            <div class="progress-w-left">
+                                <h4 class="progress-value header-title">CPU</h4>
+                                <div class="progress progress-xl">
+                                    <div class="progress-bar" id="s_1_cpu" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Streams&nbsp;Live</h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <a href="streams?server=1&filter=1"><button id="s_1_online" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button></a>
+                        </div>
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Down</h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <a href="streams?server=1&filter=2"><button id="s_1_offline" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button></a>
+                        </div>
+                        <div class="col-md-4 col-4">
+                            <div class="progress-w-left">
+                                <h4 class="progress-value header-title">MEM</h4>
+                                <div class="progress progress-xl">
+                                    <div class="progress-bar" id="s_1_mem" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Requests<small>&nbsp;/sec</small></small></h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <button id="s_1_requests" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button>
+                        </div>
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Uptime</h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <button id="s_1_uptime" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0d 0h</button>
+                        </div>
+                        <div class="col-md-4 col-4">
+                            <div class="progress-w-left">
+                                <h4 class="progress-value header-title">IO</h4>
+                                <div class="progress progress-xl">
+                                    <div class="progress-bar" id="s_1_io" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Input<small>&nbsp;(Mbps)</small></h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <button id="s_1_input" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button>
+                        </div>
+                        <div class="col-md-2 col-2">
+                            <h4 class="header-title">Output<small>&nbsp;(Mbps)</small></h4>
+                        </div>
+                        <div class="col-md-2 col-2 text-center">
+                            <button id="s_1_output" type="button" class="btn btn-light btn-xs waves-effect waves-light btn-fixed-min">0</button>
+                        </div>
+                        <div class="col-md-4 col-4">
+                            <div class="progress-w-left">
+                                <h4 class="progress-value header-title">DISK</h4>
+                                <div class="progress progress-xl">
+                                    <div class="progress-bar" id="s_1_fs" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span data-plugin="peity-line" data-fill="#675db7" data-stroke="#675db7" data-width="100%" data-height="50" data-min="0" data-max="100">21.68,17,17.04,18.56,18.13,17.19,17.23,18.39,19.24,18.37,17.31,17.1,16.84,16.89,17.14,17.22,16.83,17.06,17.45,19.24,17.3,19.51,16.96,18.99,21.71,21.58,18.46,17.39,18.57,17.15,17.75,22.76,17.2,17.32,19.67,22.73,18.25,18.57,30.89,21.74,25.09,17.13,17.36,21.29,29.75,20.47,17.5,17.76,22.51,19.28,21.67,18.59,18.6,20.22,28.64,20.51,17.37,20.06,17.1,20.28</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-streams-modal-center" tabindex="-1" role="dialog" aria-labelledby="streamViewLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="datatable-sources" class="table table-striped table-borderless mb-0" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Server</th>
+                        <th>Clients</th>
+                        <th>Uptime</th>
+                        <th>Actions</th>
+                        <th>Actions</th>
+                        <th>Stream Info</th>
+                        <th>Stream Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-epg-modal-center" tabindex="-1" role="dialog" aria-labelledby="epgViewLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="datatable-epg" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Time</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-live-modal-center" tabindex="-1" role="dialog" aria-labelledby="liveViewLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="datatable-live" class="table table-striped table-borderless mb-0" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Quality</th>
+                        <th>Line</th>
+                        <th>Stream</th>
+                        <th>Server</th>
+                        <th>Player</th>
+                        <th>ISP</th>
+                        <th class="text-center">IP</th>
+                        <th class="text-center">Duration</th>
+                        <th class="text-center">Output</th>
+                        <th class="text-center">Restreamer</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-whois-modal-center" tabindex="-1" role="dialog" aria-labelledby="whoisLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="whoisLabel"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="table mb-0" id="whois-table">
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="bg-secondary text-center text-white" colspan="2">GEOLOCATION</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Continent</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Country</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">City</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Postcode</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Lat Lng</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-secondary text-center text-white" colspan="2">ISP</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">ISP Name</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Organisation</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">AS Number</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Type</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-secondary text-center text-white" colspan="2">LOCALE</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Timezone</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Local Time</th>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-logs-modal-center" tabindex="-1" role="dialog" aria-labelledby="clearLogsLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="clearLogsLabel">Clear Logs</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row mb-4">
+                    <label class="col-md-4 col-form-label" for="range_clear">Date Range</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control text-center date" id="range_clear_from" name="range_clear_from" data-toggle="date-picker" data-single-date-picker="true" autocomplete="off" placeholder="From">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control text-center date" id="range_clear_to" name="range_clear_to" data-toggle="date-picker" data-single-date-picker="true" autocomplete="off" placeholder="To">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <input id="clear_logs" type="submit" class="btn btn-primary" value="Clear" style="width:100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade addModal" role="dialog" aria-labelledby="addLabel" aria-hidden="true" style="display: none;" data-username="" data-password="">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addModal">Select Series:</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <select id="add_series_id" class="form-control" data-toggle="select2"></select>
+                </div>
+                <div class="col-12 add-margin-top-20">
+                    <div class="input-group">
+                        <div class="input-group-append" style="width:100%">
+                            <button style="width:50%" class="btn btn-success waves-effect waves-light" type="button" onClick="addEpisode();"><i class="mdi mdi-plus-circle-outline"></i> Add Episode</button>
+                            <button style="width:50%" class="btn btn-info waves-effect waves-light" type="button" onClick="addEpisodes();"><i class="mdi mdi-plus-circle-multiple-outline"></i> Multiple Episodes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade downloadModal" role="dialog" aria-labelledby="downloadLabel" aria-hidden="true" style="display: none;" data-username="" data-password="">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="downloadModal">Download Playlist</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-md-4 col-form-label" for="download_type">Format</label>
+                    <div class="col-8">
+                        <select id="download_type" class="form-control" data-toggle="select2">
+                            <optgroup label="M3U Standard"><option value="m3u?output=hls">M3U Standard - HLS </option><option value="m3u">M3U Standard - MPEGTS</option><option value="m3u?output=rtmp">M3U Standard - RTMP</option></optgroup><optgroup label="M3U Plus"><option value="m3u_plus?output=hls">M3U Plus - HLS </option><option value="m3u_plus">M3U Plus - MPEGTS</option><option value="m3u_plus?output=rtmp">M3U Plus - RTMP</option></optgroup><optgroup label="Simple List"><option value="simple?output=hls">Simple List - HLS </option><option value="simple">Simple List - MPEGTS</option><option value="simple?output=rtmp">Simple List - RTMP</option></optgroup><optgroup label="Ariva"><option value="ariva?output=hls">Ariva - HLS </option><option value="ariva">Ariva - MPEGTS</option><option value="ariva?output=rtmp">Ariva - RTMP</option></optgroup><optgroup label="DreamBox OE 2.0"><option value="dreambox?output=hls">DreamBox OE 2.0 - HLS </option><option value="dreambox">DreamBox OE 2.0 - MPEGTS</option><option value="dreambox?output=rtmp">DreamBox OE 2.0 - RTMP</option></optgroup><optgroup label="Enigma 2 OE 1.6"><option value="enigma16?output=hls">Enigma 2 OE 1.6 - HLS </option><option value="enigma16">Enigma 2 OE 1.6 - MPEGTS</option><option value="enigma16?output=rtmp">Enigma 2 OE 1.6 - RTMP</option></optgroup><optgroup label="Enigma 2 OE 1.6 Auto Script"><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma216_script?output=hls">Enigma 2 OE 1.6 Auto Script - HLS </option><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma216_script">Enigma 2 OE 1.6 Auto Script - MPEGTS</option><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma216_script?output=rtmp">Enigma 2 OE 1.6 Auto Script - RTMP</option></optgroup><optgroup label="Enigma 2 OE 2.0 Auto Script"><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma22_script?output=hls">Enigma 2 OE 2.0 Auto Script - HLS </option><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma22_script">Enigma 2 OE 2.0 Auto Script - MPEGTS</option><option data-text="wget -O /etc/enigma2/iptv.sh {DEVICE_LINK} && chmod 777 /etc/enigma2/iptv.sh && /etc/enigma2/iptv.sh" value="enigma22_script?output=rtmp">Enigma 2 OE 2.0 Auto Script - RTMP</option></optgroup><optgroup label="Fortec999/Prifix9400/Starport"><option value="fps?output=hls">Fortec999/Prifix9400/Starport - HLS </option><option value="fps">Fortec999/Prifix9400/Starport - MPEGTS</option><option value="fps?output=rtmp">Fortec999/Prifix9400/Starport - RTMP</option></optgroup><optgroup label="Geant/Starsat/Tiger/Qmax/Hyper/Royal"><option value="gst?output=hls">Geant/Starsat/Tiger/Qmax/Hyper/Royal - HLS </option><option value="gst">Geant/Starsat/Tiger/Qmax/Hyper/Royal - MPEGTS</option><option value="gst?output=rtmp">Geant/Starsat/Tiger/Qmax/Hyper/Royal - RTMP</option></optgroup><optgroup label="GigaBlue"><option value="gigablue?output=hls">GigaBlue - HLS </option><option value="gigablue">GigaBlue - MPEGTS</option><option value="gigablue?output=rtmp">GigaBlue - RTMP</option></optgroup><optgroup label="MediaStar / StarLive v4"><option value="mediastar?output=hls">MediaStar / StarLive v4 - HLS </option><option value="mediastar">MediaStar / StarLive v4 - MPEGTS</option><option value="mediastar?output=rtmp">MediaStar / StarLive v4 - RTMP</option></optgroup><optgroup label="Octagon"><option value="octagon?output=hls">Octagon - HLS </option><option value="octagon">Octagon - MPEGTS</option><option value="octagon?output=rtmp">Octagon - RTMP</option></optgroup><optgroup label="Octagon Auto Script"><option data-text="wget -qO /var/bin/iptv {DEVICE_LINK}" value="octagon_script?output=hls">Octagon Auto Script - HLS </option><option data-text="wget -qO /var/bin/iptv {DEVICE_LINK}" value="octagon_script">Octagon Auto Script - MPEGTS</option><option data-text="wget -qO /var/bin/iptv {DEVICE_LINK}" value="octagon_script?output=rtmp">Octagon Auto Script - RTMP</option></optgroup><optgroup label="Revolution 60/60 | Sunplus"><option value="revosun?output=hls">Revolution 60/60 | Sunplus - HLS </option><option value="revosun">Revolution 60/60 | Sunplus - MPEGTS</option><option value="revosun?output=rtmp">Revolution 60/60 | Sunplus - RTMP</option></optgroup><optgroup label="Spark"><option value="spark?output=hls">Spark - HLS </option><option value="spark">Spark - MPEGTS</option><option value="spark?output=rtmp">Spark - RTMP</option></optgroup><optgroup label="Starlive v3/StarSat HD6060/AZclass"><option value="starlivev3?output=hls">Starlive v3/StarSat HD6060/AZclass - HLS </option><option value="starlivev3">Starlive v3/StarSat HD6060/AZclass - MPEGTS</option><option value="starlivev3?output=rtmp">Starlive v3/StarSat HD6060/AZclass - RTMP</option></optgroup><optgroup label="StarLive v5"><option value="starlivev5?output=hls">StarLive v5 - HLS </option><option value="starlivev5">StarLive v5 - MPEGTS</option><option value="starlivev5?output=rtmp">StarLive v5 - RTMP</option></optgroup><optgroup label="WebTV List"><option value="webtvlist?output=hls">WebTV List - HLS </option><option value="webtvlist">WebTV List - MPEGTS</option><option value="webtvlist?output=rtmp">WebTV List - RTMP</option></optgroup><optgroup label="Zorro"><option value="zorro?output=hls">Zorro - HLS </option><option value="zorro">Zorro - MPEGTS</option><option value="zorro?output=rtmp">Zorro - RTMP</option></optgroup>                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4 col-form-label" for="output_type">Limit Output</label>
+                    <div class="col-8">
+                        <select id="output_type" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose...">
+                            <option value="live">Live Streams</option>
+                            <option value="movie">Movies</option>
+                            <option value="created_live">Created Channels</option>
+                            <option value="radio_streams">Radio Stations</option>
+                            <option value="series">TV Series</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="download_url" value="">
+                            <div class="input-group-append">
+                                <button class="btn btn-warning waves-effect waves-light" type="button" onClick="copyDownload();"><i class="mdi mdi-content-copy"></i></button>
+                                <button class="btn btn-info waves-effect waves-light" type="button" onClick="doDownload();" id="download_button" disabled><i class="mdi mdi-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade messageModal" role="dialog" aria-labelledby="messageModal" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="messageModal">MAG Event</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <select id="message_type" class="form-control" data-toggle="select2" >
+                        <option value="" selected>Select an Event:</option>
+                        <optgroup label="">
+                            <option value="play_channel">Play Channel</option>
+                            <option value="reload_portal">Reload Portal</option>
+                            <option value="reboot">Reboot Device</option>
+                            <option value="send_msg">Send Message</option>
+                            <option value="cut_off">Close Portal</option>
+                            <option value="reset_stb_lock">Reset STB Lock</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="col-12" style="margin-top:20px;display:none;" id="send_msg_form">
+                    <div class="form-group row mb-4">
+                        <div class="col-md-12">
+                            <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter a custom message..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label class="col-md-9 col-form-label" for="reboot_portal">Reboot Portal on Confirmation</label>
+                        <div class="col-md-3">
+                            <input name="reboot_portal" id="reboot_portal" type="checkbox" data-plugin="switchery" class="js-switch" data-color="#039cfd"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top:20px;display:none;" id="play_channel_form">
+                    <div class="form-group row mb-4">
+                        <label class="col-md-3 col-form-label" for="selected_channel">Channel</label>
+                        <div class="col-md-9">
+                            <select id="selected_channel" name="selected_channel" class="form-control" data-toggle="select2" style="width:100%;"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button disabled id="message_submit" type="button" class="btn btn-primary waves-effect">Send Event</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-server-modal-center" tabindex="-1" role="dialog" aria-labelledby="restartServicesLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="restartServicesLabel">Server Tools</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <input id="reinstall_server" type="submit" class="btn btn-light" value="Reinstall Server" style="width:100%"  />
+                    </div>
+                    <div class="col-md-2">
+                        <input id="restart_services_ssh" type="submit" class="btn btn-light" value="Restart Services" style="width:100%" />
+                    </div>
+                    <div class="col-md-2">
+                        <input id="reboot_server_ssh" type="submit" class="btn btn-light" value="Reboot Server" style="width:100%" />
+                    </div>
+                    <div class="col-md-2">
+                        <input id="update_binaries" type="submit" class="btn btn-light" value="Update Binaries" style="width:100%"  />
+                    </div>
+                    <div class="col-md-3">
+                        <input id="update_server" type="submit" class="btn btn-light" value="Update Server" style="width:100%"  />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-domains" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">Domain List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="sub-header">Ensure the following domains are entered in your reCAPTCHA V2 admin console, otherwise your resellers will be unable to login via their domain.</p>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th>Type / Reseller</th>
+                            <th>Domain Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Server IP</td>
+                            <td>94.136.190.139</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-xuiepg-modal-center" tabindex="-1" role="dialog" aria-labelledby="epgBrowserLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="epgBrowserLabel">XUI EPG Browser</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <table id="datatable-epg-api" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Icon</th>
+                        <th class="text-center">Call Sign</th>
+                        <th>Name</th>
+                        <th class="text-center">Language</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-provider-streams-modal-center" tabindex="-1" role="dialog" aria-labelledby="providerStreamsLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="providerStreamsLabel">Provider Streams</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <table id="datatable-provider-streams" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Icon</th>
+                        <th>Stream Name</th>
+                        <th>Provider</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-provider-movies-modal-center" tabindex="-1" role="dialog" aria-labelledby="providerMoviesLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="providerMoviesLabel">Provider Movies</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <table id="datatable-provider-movies" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th>Stream Name</th>
+                        <th>Provider</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-picon-modal-center" tabindex="-1" role="dialog" aria-labelledby="epgPiconLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-center modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="epgPiconLabel">Use the EPG icon for this stream?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="epg-picon" src="" class="img-thumbnail" style="max-width: 400px; max-height: 250px;"><br/><br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success waves-effect waves-light" id="epg_picon_save">Use Icon</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade creditsModal" role="dialog" aria-labelledby="creditsLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="creditsModal">Add / Remove Credits</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-md-8 col-form-label" for="credits">Credits</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control text-center" id="credits" onkeypress="return isNumberKey(event)" name="credits" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" id="credits_reason" name="credits_reason" placeholder="Reason for Adjustment..." value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button class="btn btn-info waves-effect waves-light" style="width:100%;" type="button" onClick="submitCredits();">Adjust Credits</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-programme" tabindex="-1" role="dialog" aria-labelledby="programmeLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span id="programmeLabel"></span> &nbsp;<small><span id="programmeStart"></span></small></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="sub-header" id="programmeDescription"></p>
+                <button type="button" id="programmeRecord" class="btn btn-danger waves-effect"><i class="mdi mdi-record"></i> Record</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade fingerprintModal" role="dialog" aria-labelledby="fingerprintLabel" aria-hidden="true" style="display: none;" data-id="" data-type="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="fingerprintModal">Fingerprint</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-md-1 col-2 col-form-label text-center" for="mod_fingerprint_type">Type</label>
+                    <div class="col-md-2 col-6">
+                        <select id="mod_fingerprint_type" class="form-control text-center" data-toggle="select2">
+                            <option value="1">Activity ID</option>
+                            <option value="2">Username</option>
+                            <option value="3">Message</option>
+                        </select>
+                    </div>
+                    <label class="col-md-1 col-2 col-form-label text-center" for="mod_font_size">Size</label>
+                    <div class="col-md-1 col-2">
+                        <input type="text" class="form-control text-center" id="mod_font_size" value="36" placeholder="">
+                    </div>
+                    <label class="col-md-1 col-2 col-form-label text-center" for="mod_font_color">Colour</label>
+                    <div class="col-md-2 col-2">
+                        <input type="text" id="mod_font_color" class="form-control text-center" value="#ffffff">
+                    </div>
+                    <label class="col-md-1 col-2 col-form-label text-center" for="mod_position_x">Pos</label>
+                    <div class="col-md-1 col-2">
+                        <input type="text" class="form-control text-center" id="mod_position_x" value="10" placeholder="X">
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <input type="text" class="form-control text-center" id="mod_position_y" value="10" placeholder="Y">
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <button type="button" class="btn btn-info waves-effect waves-light" onClick="setModalFingerprint()">
+                            <i class="mdi mdi-fingerprint"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-12 col-2" style="margin-top:10px;display:none;" id="mod_custom_message_div">
+                        <input type="text" class="form-control" id="mod_custom_message" value="" placeholder="Custom Message">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-failures-modal-center" tabindex="-1" role="dialog" aria-labelledby="failuresLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="failuresLabel"><button onClick='clearLogs()' type='button' class='btn btn-secondary btn-xs waves-effect waves-light'>Clear Stream Logs</button></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <table id="datatable-stream" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th>Server Name</th>
+                        <th class="text-center">Source</th>
+                        <th class="text-center">Action</th>
+                        <th class="text-center">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-proxies-modal-center" tabindex="-1" role="dialog" aria-labelledby="proxiesLabel" aria-hidden="true" style="display: none;" data-id="">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="datatable-sources" class="table table-striped table-borderless dt-responsive">
+                    <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th>Server Name</th>
+                        <th class="text-center">Server IP</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer :: footer }"></footer>
+<script>
+    var rCurrentPage = "dashboard";
+    var rReferer = null;
+    var rErrors = ["STATUS_FAILURE","STATUS_SUCCESS","STATUS_SUCCESS_MULTI","STATUS_CODE_LENGTH","STATUS_NO_SOURCES","STATUS_DISABLED","STATUS_NOT_ADMIN","STATUS_INVALID_EMAIL","STATUS_INVALID_PASSWORD","STATUS_INVALID_IP","STATUS_INVALID_PLAYLIST","STATUS_INVALID_NAME","STATUS_INVALID_CAPTCHA","STATUS_INVALID_CODE","STATUS_INVALID_DATE","STATUS_INVALID_FILE","STATUS_INVALID_GROUP","STATUS_INVALID_DATA","STATUS_INVALID_DIR","STATUS_INVALID_MAC","STATUS_EXISTS_CODE","STATUS_EXISTS_NAME","STATUS_EXISTS_USERNAME","STATUS_EXISTS_MAC","STATUS_EXISTS_SOURCE","STATUS_EXISTS_IP","STATUS_EXISTS_DIR","STATUS_SUCCESS_REPLACE","STATUS_FLUSH","STATUS_TOO_MANY_RESULTS","STATUS_SPACE_ISSUE","STATUS_INVALID_USER","STATUS_CERTBOT","STATUS_CERTBOT_INVALID","STATUS_INVALID_INPUT","STATUS_NOT_RESELLER","STATUS_NO_TRIALS","STATUS_INSUFFICIENT_CREDITS","STATUS_INVALID_PACKAGE","STATUS_INVALID_TYPE","STATUS_INVALID_USERNAME","STATUS_INVALID_SUBRESELLER","STATUS_NO_DESCRIPTION","STATUS_NO_KEY","STATUS_EXISTS_HMAC","STATUS_CERTBOT_RUNNING","STATUS_RESERVED_CODE","STATUS_NO_TITLE","STATUS_NO_SOURCE"];
+    function submitForm(rType, rData, rReferer=null) {
+        $(".wrapper").fadeOut();
+        $("#status").fadeIn();
+        if (!rReferer) {
+            rReferer = "";
+        }
+        $.ajax({
+            type: "POST",
+            url: "post.php?action=" + encodeURIComponent(rType) + "&referer=" + encodeURIComponent(rReferer),
+            data: rData,
+            processData: false,
+            contentType: false,
+            success: function(rReturn) {
+                try {
+                    var rJSON = $.parseJSON(rReturn);
+                } catch (e) {
+                    var rJSON = {"status": 0, "result": false};
+                }
+                callbackForm(rJSON);
+            }
+        });
+    }
+    function callbackForm(rData) {
+        if (rData.location) {
+            if (self !== top) {
+                parent.closeEditModal();
+                parent.showSuccess("Item has been saved.");
+            } else if (rData.reload) {
+                window.location.href = rData.location;
+            } else {
+                navigate(rData.location);
+            }
+        } else {
+            $(".wrapper").fadeIn();
+            $("#status").fadeOut();
+            $(':input[type="submit"]').prop('disabled', false);
+
+            if (window.rErrors[rData.status] == "STATUS_INVALID_INPUT") {
+                showError("Required entry fields have not been populated. Please check the form.");
+                return;
+            }
+
+            switch (window.rCurrentPage) {
+                case "record":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_NO_TITLE":
+                            showError("Please enter a title for the recorded event.");
+                            break;
+
+                        case "STATUS_NO_SOURCE":
+                            showError("Please select a source server to record the event from.");
+                            break;
+
+                        case "STATUS_NO_DESTINATION":
+                            showError("Please select a destination server to record the event to.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "quick_tools":
+                    showSuccess("Quick tool was successfully executed.");
+                    break;
+
+                case "code":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_CODE_LENGTH":
+                            showError("Your access code needs to be at least 8 characters long.");
+                            break;
+
+                        case "STATUS_INVALID_CODE":
+                            showError("Please enter an access code.");
+                            break;
+
+                        case "STATUS_RESERVED_CODE":
+                            showError("Sorry, this code is reserved for system functions.");
+                            break;
+
+                        case "STATUS_EXISTS_CODE":
+                            showError("This access code already exists, please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "hmac":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_NO_DESCRIPTION":
+                            showError("Please enter a description.");
+                            break;
+
+                        case "STATUS_EXISTS_HMAC":
+                            showError("This HMAC Key already exists, please use another.");
+                            break;
+
+                        case "STATUS_NO_KEY":
+                            showError("Please generate a key.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "edit_profile":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_EMAIL":
+                            showError("Please enter a valid email address.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "ip":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_IP":
+                            showError("Please enter a valid IP address / CIDR.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "user":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_GROUP":
+                            showError("Please select a member group.");
+                            break;
+
+                        case "STATUS_EXISTS_USERNAME":
+                            showError("The username you selected already exists. Please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "provider":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_IP":
+                            showError("This provider is already being tracked on the system.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "created_channel":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_NO_SOURCES":
+                            showError("Please select at least one source for your channel.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "group":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_NAME":
+                            showError("This group name is already in use. Please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "isp":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_NAME":
+                            showError("This ISP has already been blocked.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "package":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_NAME":
+                            showError("This package name is already in use. Please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "mag":
+                case "enigma":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_DATE":
+                            showError("Please enter a valid date.");
+                            break;
+
+                        case "STATUS_INVALID_USER":
+                            showError("The paired user does not exist! Please unlink it.");
+                            break;
+
+                        case "STATUS_INVALID_MAC":
+                            showError("Please enter a valid MAC address.");
+                            break;
+
+                        case "STATUS_EXISTS_MAC":
+                            showError("The MAC address you entered is already in use.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "serie":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_CODE":
+                            showError("This series already exists in your database.");
+                            break;
+
+                        case "STATUS_NO_SOURCES":
+                            showError("No new episodes could be found in the playlist or folder.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "movie":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_NAME":
+                            showError("This movie already exists in your database. Please use another name.");
+                            break;
+
+                        case "STATUS_NO_SOURCES":
+                            showError("Please select at least one source for your movie.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "radio":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_SOURCE":
+                            showError("This station source is already in your database. Please use another URL.");
+                            break;
+
+                        case "STATUS_NO_SOURCES":
+                            showError("Please select at least one source for your station.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "server_install":
+                case "proxy":
+                case "server":
+                case "rtmp_ip":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_IP":
+                            showError("Please enter a valid IP address / CIDR.");
+                            break;
+
+                        case "STATUS_EXISTS_IP":
+                            showError("This IP address is already in the database. Please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "stream":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_FILE":
+                            showError("Could not process M3U file, please use another.");
+                            break;
+
+                        case "STATUS_EXISTS_SOURCE":
+                            showError("This stream source is already in your database. Please use another URL.");
+                            break;
+
+                        case "STATUS_NO_SOURCES":
+                            showError("Please select at least one source for your stream.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "ticket":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_DATA":
+                            showError("Please ensure you enter both a title and message.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "watch_add":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_DIR":
+                            showError("This directory is already being watched, please use another.");
+                            break;
+
+                        case "STATUS_INVALID_DIR":
+                            showError("An invalid directory was entered, please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "plex_add":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_EXISTS_DIR":
+                            showError("This library is already being synced, please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                case "line":
+                    switch (window.rErrors[rData.status]) {
+                        case "STATUS_INVALID_DATE":
+                            showError("Please enter a valid date.");
+                            break;
+
+                        case "STATUS_EXISTS_USERNAME":
+                            showError("The username you selected already exists. Please use another.");
+                            break;
+
+                        default:
+                            showError("An error occured while processing your request.");
+                            break;
+                    }
+                    break;
+
+                default:
+                    showError("An error occured while processing your request.");
+                    break;
+            }
+        }
+    }
+</script>
+<script>
+    var rRealURL = undefined;
+    var jBoxes = [];
+    var rOptions = [];
+    var rSwitches = [];
+    var rRefresh = null;
+    var rProcessing = false;
+    var rSearchTop = 0;
+    var rShiftHeld = false;
+
+    window.XUI = window.XUI || {};
+    window.XUI.Listings = window.XUI.Listings || {};
+
+    function hideModal(rName, rDispose = false) {
+        $(rName).modal("hide");
+        if (rDispose) {
+            $(rName).modal("dispose");
+        }
+        $(rName).css("display", "none");
+    }
+    function showError(rText) {
+        $.toast({
+            text: rText,
+            icon: 'warning',
+            loader: true,
+            loaderBg: '#c62828',
+            hideAfter: 8000
+        })
+    }
+    function showSuccess(rText) {
+        $.toast({
+            text: rText,
+            icon: 'success',
+            loader: true,
+            hideAfter: 5000
+        })
+    }
+    function findRowByID(rTable, rColumn, rID) {
+        for (rRow in rTable.rows()[0]) {
+            if ($(rTable.row(rRow).data()[rColumn]).data("id") == rID) {
+                return rRow;
+            } else if ((rTable.row(rRow).data()[rColumn] == rID) || ($(rTable.row(rRow).data()[rColumn]).text() == rID)) {
+                return rRow;
+            }
+        }
+        return null;
+    }
+    function isValidDomain(domain) {
+        var re = new RegExp(/^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,16})$/);
+        return domain.match(re);
+    }
+    function isValidIP(rIP) {
+        if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(rIP)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function isValidDate(dateString) {
+        var regEx = /^\d{4}-\d{2}-\d{2}$/;
+        if(!dateString.match(regEx)) return false;  // Invalid format
+        var d = new Date(dateString);
+        var dNum = d.getTime();
+        if(!dNum && dNum !== 0) return false; // NaN value, Invalid date
+        return d.toISOString().slice(0,10) === dateString;
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode != 45 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function pingSession() {
+        $.getJSON("./session", function(data) {
+            if (!data.result) {
+                window.location.href = './login?referrer=' + encodeURIComponent(location.href.split("/").slice(-1)[0]);
+            }
+        });
+        setTimeout(pingSession, 30000);
+    }
+    function modalFingerprint(rID, rType = "stream") {
+        $(".quick_search").select2("close");
+        $("#topnav-search").removeClass("active");
+        refreshTooltips();
+        $('#mod_fingerprint_type').select2();
+        $("#mod_custom_message_div").hide();
+        $("#mod_fingerprint_type").val(1); $("#mod_font_size").val(36); $("#mod_font_color").val("#ffffff"); $("#mod_position_x").val(10); $("#mod_position_y").val(10); $("#mod_custom_message").val("");
+        $(".fingerprintModal").data("id", rID);
+        $(".fingerprintModal").data("type", rType)
+        $('.fingerprintModal').modal('show');
+    }
+    function setModalFingerprint() {
+        rArray = {"id": $(".fingerprintModal").data("id"), "font_size": $("#mod_font_size").val(), "font_color": $("#mod_font_color").val(), "message": "", "type": $("#mod_fingerprint_type").val(), "xy_offset": ""};
+        if ($(".fingerprintModal").data("type") == "user") {
+            rArray["user"] = true;
+        }
+        if (rArray.type == 3) {
+            rArray["message"] = $("#mod_custom_message").val();
+        }
+        if (($("#mod_position_x").val() >= 0) && ($("#mod_position_y").val() >= 0)) {
+            rArray["xy_offset"] = $("#mod_position_x").val() + "x" + $("#mod_position_y").val();
+        }
+        if ((rArray["font_size"] > 0) && (rArray["font_color"]) && ((rArray["message"]) || (rArray["type"] != 3)) && (rArray["font_size"] > 0) && (rArray["xy_offset"])) {
+            $.getJSON("./api?action=fingerprint&data=" + encodeURIComponent(JSON.stringify(rArray)), function(data) {
+                if (data.result == true) {
+                    $.toast("Fingerprint signal has been sent.");
+                } else {
+                    $.toast("An error occured while processing your request.");
+                }
+            });
+        } else {
+            $.toast("Invalid fingerprint configuration. Please check that all fields are correct and try again.");
+        }
+        $(".fingerprintModal").modal("hide");
+    }
+    function setSwitch(switchElement, checkedBool) {
+        if((checkedBool && !switchElement.isChecked()) || (!checkedBool && switchElement.isChecked())) {
+            switchElement.setPosition(true);
+            switchElement.handleOnchange(true);
+        }
+    }
+    function reloadMenu() {
+        $(".navigation-menu a").each(function() {
+            ($(this).removeClass("active"), $(this).parent().removeClass("active"), $(this).parent().parent().removeClass("in"), $(this).parent().parent().prev().removeClass("active"), $(this).parent().parent().parent().removeClass("active"), $(this).parent().parent().parent().parent().removeClass("in"), $(this).parent().parent().parent().parent().parent().removeClass("active"));
+        });
+        $(".navigation-menu a").each(function() {
+            var rURL = window.location.href.split(/[?#]/)[0];
+            if (this.href == rURL) {
+                ($(this).addClass("active"), $(this).parent().addClass("active"), $(this).parent().parent().addClass("in"), $(this).parent().parent().prev().addClass("active"), $(this).parent().parent().parent().addClass("active"), $(this).parent().parent().parent().parent().addClass("in"), $(this).parent().parent().parent().parent().parent().addClass("active"));
+            }
+        });
+        setTimeout(fadeRipple, 350);
+    }
+    function fadeRipple() {
+        $(".waves-ripple").attr("style", "");
+    }
+    function resetKnobs() {
+        $('[data-plugin="knob"]').each(function(t, i) {
+            $(this).knob({
+                'format' : function (value) {
+                    return value + '%';
+                }
+            })
+        });
+        $('[data-plugin="peity-line"]').each(function(t, i) {
+            $(this).peity("line", $(this).data());
+        });
+    }
+    function killTimeouts() {
+        var highestTimeoutId = setTimeout(";");
+        for (var i = 0 ; i < highestTimeoutId ; i++) {
+            clearTimeout(i);
+        }
+    }
+    function deleteSwitches() {
+        $(window.rSwitches).each(function() {
+            $(this).destroy();
+        });
+        $(".switchery").remove();
+    }
+    function deleteSelect2() {
+        $("select").each(function() {
+            if ($(this).data('select2')) {
+                $(this).select2('destroy');
+            }
+        });
+    }
+    function navigate(rURL, rNewTab = false) {
+        if ((window.rCurrentPage) && (rURL == window.rCurrentPage + "#")) {
+            return false;
+        }
+        if (rURL.split("#")[0].split("?")[0] == "epg_view") {
+            window.location.href = rURL;
+            window.location.reload();
+            return;
+        }
+        if (window.rShiftHeld) {
+            return;
+        }
+        if (rNewTab) {
+            window.open(rURL, '_blank');
+            return;
+        }
+        $(".wrapper").off().find("*").off();
+        $(".modal").off().find("*").off();
+        $(".submenu").hide();
+        hideModal('.modal', true);
+        $(".modal-backdrop").hide();
+        $(".wrapper").fadeOut();
+        $(".jBox-wrapper").hide();
+        $(window.jBoxes).each(function() {
+            this.close();
+        });
+        window.rReferer = window.location.href.split("/").reverse()[0];
+        window.rCurrentPage = rURL.split("/").reverse()[0].split("?")[0].split(".")[0];
+        setURL(rURL, false);
+        killTimeouts();
+        clearTimeout(window.rRefresh);
+        deleteSwitches();
+        deleteSelect2();
+        reloadMenu();
+        $.magnificPopup.close();
+        $("#status").fadeIn();
+        $(".jq-toast-single").remove();
+        $('html, body').animate({scrollTop : 0},400);
+        $("#header_stats").show();
+        $(".app-search").width(150);
+        $("#topnav-search").removeClass("active");
+        $(".multiselect").hide();
+        $.get(rURL, function(rData) {
+            if ($(rData).filter("title").data("id") == "login") {
+                window.location.href = './login?referrer=' + encodeURIComponent(location.href.split("/").slice(-1)[0]);
+            }
+            var rTables = $.fn.dataTable.fnTables(true);
+            $(rTables).each(function () {
+                $(this).DataTable().destroy(true);
+            });
+            document.title = $(rData).filter("title").text();
+            $(".wrapper").replaceWith($(rData).filter(".wrapper"));
+            $("#scripts").replaceWith($(rData).filter("#scripts"));
+            $("#topnav-custom").replaceWith($(rData).filter("#topnav").find("#topnav-custom"));
+            jQuery.ready();
+            resetKnobs();
+            bindHref();
+            refreshTooltips();
+            if ($(".nav")) {
+                $(".nav:first").find(".nav-link:first").trigger("click");
+            }
+            $(".wrapper").fadeIn();
+            $("#status").fadeOut();
+            $(':input[type="submit"]').prop('disabled', false);
+        }).fail(function() {
+            window.location.href = rURL;
+        });
+    }
+    function reloadPage() {
+        navigate(window.location.href);
+    }
+    function refreshTooltips(rModals = true) {
+        if (rModals) {
+            $(".jBox-wrapper").hide();
+        }
+        $(window.jBoxes).each(function() {
+            this.close();
+            this.destroy();
+        });
+        window.jBoxes = [];
+        $('.tooltip-left').each(function() {
+            window.jBoxes.push(new $(this).jBox('Tooltip', {theme: 'TooltipDark', position: {x: 'left', y: 'center'}, outside: 'x'}));
+        });
+        $('.tooltip-right').each(function() {
+            window.jBoxes.push(new $(this).jBox('Tooltip', {theme: 'TooltipDark', position: {x: 'right', y: 'center'}, outside: 'x'}));
+        });
+        $('.tooltip').each(function() {
+            window.jBoxes.push(new $(this).jBox('Tooltip', {theme: 'TooltipDark'}));
+        });
+    }
+    function setURL(rURL, rReplace=true) {
+        if (rReplace) {
+            window.history.replaceState({}, '', rURL);
+        } else {
+            if (window.location.href.split("/").reverse()[0].split("?")[0].split(".")[0] != rURL.split("/").reverse()[0].split("?")[0].split(".")[0]) {
+                window.history.pushState({}, '', rURL);
+            }
+            window.rRealURL = rURL;
+        }
+    }
+    function delParams(rParams) {
+        $.each(rParams, function(rIndex, rParam) {
+            delParam(rParam);
+        });
+    }
+    function delParam(rParam) {
+        var rURL = new URL(document.location);
+        rURL.searchParams.delete(rParam);
+        setURL(rURL);
+    }
+    function setParam(rParam, rValue) {
+        var rURL = new URL(document.location);
+        rURL.searchParams.set(rParam, rValue);
+        setURL(rURL);
+    }
+    function getParam(rParam) {
+        var rURL = new URL(document.location);
+        return rURL.searchParams.get(rParam);
+    }
+    function hasParam(rParam) {
+        var rURL = new URL(document.location);
+        return rURL.searchParams.has(rParam);
+    }
+    function hasParams(rParams, rAll=false) {
+        var rURL = new URL(document.location);
+        var rCount = 0;
+        $.each(rParams, function(rIndex, rParam) {
+            if (rURL.searchParams.has(rParam)) {
+                rCount += 1;
+            }
+        });
+        if (((rCount > 0) && (!rAll)) || (rCount == rParams.length)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function bindHref() {
+        $("a").each(function() {
+            if (($(this).attr("href")) && ($(this).data("modal") === undefined) && ($(this).attr("href").slice(0,1) != "#") && ($(this).attr("href").slice(0,11) != "javascript:") && ($(this).attr("href").slice(0,8) != "epg_view")) {
+                $(this).unbind("click");
+                $(this).click(function(e) {
+                    navigate($(this).attr("href"), e.ctrlKey);
+                    e.preventDefault();
+                });
+            }
+        });
+    }
+    function whois(rIP) {
+        $("#whoisLabel").html(rIP);
+        var rRows = $("#whois-table tr");
+        $(rRows).each(function() {
+            $(this).find("td").html("");
+        });
+        $.getJSON("./api?action=ip_whois&isp=1&ip=" + encodeURIComponent(rIP), function(rData) {
+            if ("data" in rData) {
+                if (("continent" in rData.data) && ("names" in rData.data.continent) && ("en" in rData.data.continent.names)) {
+                    $(rRows[1]).find("td").html(rData.data.continent.names.en);
+                }
+                if (("country" in rData.data) && ("names" in rData.data.country) && ("en" in rData.data.country.names)) {
+                    $(rRows[2]).find("td").html(rData.data.country.names.en);
+                }
+                if (("city" in rData.data) && ("names" in rData.data.city) && ("en" in rData.data.city.names)) {
+                    $(rRows[3]).find("td").html(rData.data.city.names.en);
+                }
+                if (("postal" in rData.data) && ("code" in rData.data.postal)) {
+                    $(rRows[4]).find("td").html(rData.data.postal.code);
+                }
+                if (("location" in rData.data) && ("latitude" in rData.data.location) && ("longitude" in rData.data.location)) {
+                    $(rRows[5]).find("td").html(rData.data.location.latitude + ", " + rData.data.location.longitude);
+                }
+                if (("isp" in rData.data) && (rData.data.isp)) {
+                    if ("isp" in rData.data.isp) {
+                        $(rRows[7]).find("td").html(rData.data.isp.isp);
+                    }
+                    if ("organization" in rData.data.isp) {
+                        $(rRows[8]).find("td").html(rData.data.isp.organization);
+                    }
+                    if (("autonomous_system_number" in rData.data.isp) && ("autonomous_system_organization" in rData.data.isp)) {
+                        $(rRows[9]).find("td").html("AS" + rData.data.isp.autonomous_system_number.toString() + " - " + rData.data.isp.autonomous_system_organization);
+                    }
+                    if (rData.data.type) {
+                        $(rRows[10]).find("td").html(rData.data.type.toUpperCase());
+                    }
+                }
+                if (("location" in rData.data) && ("time_zone" in rData.data.location)) {
+                    $(rRows[12]).find("td").html(rData.data.location.time_zone);
+                }
+                if (("location" in rData.data) && ("time" in rData.data.location)) {
+                    $(rRows[13]).find("td").html(rData.data.location.time);
+                }
+            }
+        });
+        $(".bs-whois-modal-center").modal("show");
+    }
+    function headerStats() {
+        rURL = "./api?action=header_stats";
+        $.getJSON(rURL, function(data) {
+            $("#header_connections").html($.number(data.total_connections, 0));
+            $("#header_users").html($.number(data.total_users, 0));
+            $("#header_network_up").html($.number(Math.floor(data.bytes_sent / 125000), 0));
+            $("#header_network_down").html($.number(Math.floor(data.bytes_received / 125000), 0));
+            $("#header_streams_up").html($.number(data.total_running_streams, 0));
+            $("#header_streams_down").html($.number(data.offline_streams, 0));
+            setTimeout(headerStats, 1000);
+        }).fail(function() {
+            setTimeout(headerStats, 1000);
+        });
+    }
+    function addCredits(rID) {
+        $('.creditsModal').data('id', rID);
+        $("#credits_reason").val("");
+        $("#credits").val(0);
+        $('.creditsModal').modal('show');
+        $(".quick_search").select2("close");
+        $("#topnav-search").removeClass("active");
+        refreshTooltips();
+    }
+    function submitCredits() {
+        var rID = $('.creditsModal').data('id');
+        var rReason = $("#credits_reason").val();
+        var rCredits = $("#credits").val();
+        $.getJSON("./api?action=adjust_credits&id=" + encodeURIComponent(rID) + "&reason=" + encodeURIComponent(rReason) + "&credits=" + encodeURIComponent(rCredits), function(data) {
+            if (data.result === true) {
+                $.toast("Credits have been adjusted.");
+                refreshTable();
+            } else {
+                $.toast("Credits could not be adjusted.");
+            }
+        });
+        hideModal('.creditsModal');
+    }
+    function searchAPI(rType, rID, rAction, rConfirm = false) {
+        if (rType == "stream") {
+            if ((rAction == "purge") && (!rConfirm)) {
+                new jBox("Confirm", {
+                    confirmButton: "Kill",
+                    cancelButton: "Cancel",
+                    content: "Are you sure you want to kill all connections?",
+                    confirm: function () {
+                        searchAPI(rType, rID, rAction, true);
+                    }
+                }).open();
+            } else {
+                rConfirm = true;
+            }
+            if (rConfirm) {
+                $.getJSON("./api?action=stream&sub=" + rAction + "&stream_id=" + rID + "&server_id=-1", function(data) {
+                    if (data.result == true) {
+                        if (rAction == "start") {
+                            $.toast("Stream successfully started.");
+                        } else if (rAction == "stop") {
+                            $.toast("Stream successfully stopped.");
+                        } else if (rAction == "restart") {
+                            $.toast("Stream successfully restarted.");
+                        } else if (rAction == "purge") {
+                            $.toast("Connections have been killed.");
+                        }
+                        $(".bigdrop .select2-search__field").trigger("input");
+                        window.rSearchTop = $(".bigdrop .select2-results__options").scrollTop();
+                    } else {
+                        $.toast("An error occured while processing your request.");
+                    }
+                }).fail(function() {
+                    $.toast("An error occured while processing your request.");
+                });
+            }
+        } else if (rType == "movie") {
+            if ((rAction == "purge") && (!rConfirm)) {
+                new jBox("Confirm", {
+                    confirmButton: "Kill",
+                    cancelButton: "Cancel",
+                    content: "Are you sure you want to kill all connections?",
+                    confirm: function () {
+                        searchAPI(rType, rID, rAction, true);
+                    }
+                }).open();
+            } else {
+                rConfirm = true;
+            }
+            if (rConfirm) {
+                $.getJSON("./api?action=movie&sub=" + rAction + "&stream_id=" + rID + "&server_id=-1", function(data) {
+                    if (data.result == true) {
+                        if (rAction == "start") {
+                            $.toast("Movie encoding has started. It will take some time before this movie is available.");
+                        } else if (rAction == "stop") {
+                            $.toast("Movie encoding has been stopped.");
+                            refreshTable();
+                        } else if (rAction == "purge") {
+                            $.toast("Connections have been killed.");
+                        }
+                        $(".bigdrop .select2-search__field").trigger("input");
+                        window.rSearchTop = $(".bigdrop .select2-results__options").scrollTop();
+                    } else {
+                        $.toast("An error occured while processing your request.");
+                    }
+                }).fail(function() {
+                    $.toast("An error occured while processing your request.");
+                });
+            }
+        } else if (rType == "episode") {
+            if ((rAction == "purge") && (!rConfirm)) {
+                new jBox("Confirm", {
+                    confirmButton: "Kill",
+                    cancelButton: "Cancel",
+                    content: "Are you sure you want to kill all connections?",
+                    confirm: function () {
+                        searchAPI(rType, rID, rAction, true);
+                    }
+                }).open();
+            } else {
+                rConfirm = true;
+            }
+            if (rConfirm) {
+                $.getJSON("./api?action=episode&sub=" + rAction + "&stream_id=" + rID + "&server_id=-1", function(data) {
+                    if (data.result == true) {
+                        if (rAction == "start") {
+                            $.toast("Episode encoding has started. It will take some time before this episode is available.");
+                        } else if (rAction == "stop") {
+                            $.toast("Episode encoding has been stopped.");
+                        } else if (rAction == "purge") {
+                            $.toast("Connections have been killed.");
+                        }
+                        $(".bigdrop .select2-search__field").trigger("input");
+                        window.rSearchTop = $(".bigdrop .select2-results__options").scrollTop();
+                    } else {
+                        $.toast("An error occured while processing your request.");
+                    }
+                }).fail(function() {
+                    $.toast("An error occured while processing your request.");
+                });
+            }
+        } else if (rType == "user") {
+            $.getJSON("./api?action=reg_user&sub=" + rAction + "&user_id=" + rID, function(data) {
+                if (data.result === true) {
+                    if (rAction == "enable") {
+                        $.toast("User has been enabled.");
+                    } else if (rAction == "disable") {
+                        $.toast("User has been disabled.");
+                    }
+                    $(".bigdrop .select2-search__field").trigger("input");
+                    window.rSearchTop = $(".bigdrop .select2-results__options").scrollTop();
+                } else {
+                    $.toast("An error occured while processing your request.");
+                }
+            }).fail(function() {
+                $.toast("An error occured while processing your request.");
+            });
+        } else if (rType == "line") {
+            if ((rAction == "kill") && (!rConfirm)) {
+                new jBox("Confirm", {
+                    confirmButton: "Kill",
+                    cancelButton: "Cancel",
+                    content: "Are you sure you want to kill all connections for this line?",
+                    confirm: function () {
+                        searchAPI(rType, rID, rAction, true);
+                    }
+                }).open();
+            } else {
+                rConfirm = true;
+            }
+            if (rConfirm) {
+                $.getJSON("./api?action=line&sub=" + rAction + "&user_id=" + rID, function(data) {
+                    if (data.result === true) {
+                        if (rAction == "enable") {
+                            $.toast("Line has been enabled.");
+                        } else if (rAction == "disable") {
+                            $.toast("Line has been disabled.");
+                        } else if (rAction == "unban") {
+                            $.toast("Line has been unbanned.");
+                        } else if (rAction == "ban") {
+                            $.toast("Line has been banned.");
+                        } else if (rAction == "kill") {
+                            $.toast("All connections for this line have been killed.");
+                        }
+                        $(".bigdrop .select2-search__field").trigger("input");
+                        window.rSearchTop = $(".bigdrop .select2-results__options").scrollTop();
+                    } else {
+                        $.toast("An error occured while processing your request.");
+                    }
+                }).fail(function() {
+                    $.toast("An error occured while processing your request.");
+                });
+            }
+        }
+    }
+    function editModal(rEvent, rType, rID, rTitle) {
+        if (rEvent) {
+            rEvent.preventDefault();
+        }
+        eModal.iframe(rType + '?id=' + rID + '&modal=1', rTitle);
+    }
+    function closeEditModal(){
+        $('.modal').modal('hide');
+        if ($("#datatable-users").length) {
+            $("#datatable-users").DataTable().ajax.reload(null, false);
+        }
+        if ($("#datatable-streampage").length) {
+            $("#datatable-streampage").DataTable().ajax.reload(null, false);
+        }
+    }
+    function initSearch() {
+        $(".dropdown").unbind("click");
+        $(".dropdown").click(function() {
+            if ($(this).attr("id") == "search-mobile") {
+                if ($("#topnav-search").hasClass("active")) {
+                    $(".quick_search").select2("close");
+                    $("#topnav-search").removeClass("active");
+                } else {
+                    $("#topnav-search").addClass("active");
+                    $(".quick_search").select2("open");
+                }
+            } else {
+                if ($("#topnav-search").hasClass("active")) {
+                    $(".quick_search").select2("close");
+                    $("#topnav-search").removeClass("active");
+                }
+            }
+        });
+        $(".quick_search").unbind("select2:opening");
+        $(".quick_search").unbind("select2:closing");
+        $(".quick_search").unbind("select2:selecting");
+        $(".quick_search").unbind("select2:draw");
+        $(".quick_search").select2({
+            ajax: {
+                url: './api',
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        action: 'search'
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 3,
+            templateResult: function(data) { return data.html },
+            escapeMarkup: function(m) { return m; },
+            placeholder: 'Search...',
+            dropdownCssClass: 'bigdrop'
+        }).on("select2:opening", function(e) {
+            if ($("#header_stats").is(":visible")) {
+                var rMaxWidth = parseInt($(".app-search-box").position()["left"] - ($("#header_stats li:last").position()["left"] + $("#header_stats li:last").width()));
+                if (rMaxWidth < 600) {
+                    $("#header_stats").hide();
+                }
+                $(".app-search").width(600);
+            }
+            window.rSearchTop = 0;
+        }).on("select2:closing", function(e) {
+            $(".bigdrop .select2-results__options li").remove();
+            $("#header_stats").show();
+            $(".app-search").width(150);
+            window.rSearchTop = 0;
+        }).on("select2:selecting", function (e) {
+            e.preventDefault();
+            return false;
+        }).on("select2:draw", function (e) {
+            refreshTooltips();
+            if (window.rSearchTop > 0) {
+                $(".bigdrop .select2-results__options").scrollTop(window.rSearchTop);
+                window.rSearchTop = 0;
+            }
+        });
+        $(".app-search-box .select2-selection").addClass($(".app-search").data("theme")).addClass("header-search");
+        $("#mod_fingerprint_type").unbind("change");
+        $("#mod_fingerprint_type").change(function() {
+            if ($(this).val() == 3) {
+                $("#mod_custom_message_div").show();
+            } else {
+                $("#mod_custom_message_div").hide();
+            }
+        });
+        $("#mod_font_size").inputFilter(function(value) { return /^\d*$/.test(value); });
+        $("#mod_position_x").inputFilter(function(value) { return /^\d*$/.test(value); });
+        $("#mod_position_y").inputFilter(function(value) { return /^\d*$/.test(value); });
+    }
+</script>
+<script id="scripts">
+    var resizeObserver = new ResizeObserver(entries => $(window).scroll());
+    $(document).ready(function() {
+        resizeObserver.observe(document.body)
+        $("form").attr('autocomplete', 'off');
+        $(document).keypress(function(event){
+            if(event.which == 13 && event.target.nodeName != "TEXTAREA") return false;
+        });
+        $.fn.dataTable.ext.errMode = 'none';
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, {'color': '#414d5f'});
+            window.rSwitches[$(html).attr("id")] = switchery;
+        });
+        setTimeout(pingSession, 30000);
+        headerStats();
+        bindHref(); refreshTooltips();
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 200) {
+                if ($(document).height() > $(window).height()) {
+                    $('#scrollToBottom').fadeOut();
+                }
+                $('#scrollToTop').fadeIn();
+            } else {
+                $('#scrollToTop').fadeOut();
+                if ($(document).height() > $(window).height()) {
+                    $('#scrollToBottom').fadeIn();
+                } else {
+                    $('#scrollToBottom').hide();
+                }
+            }
+        });
+        $("#scrollToTop").unbind("click");
+        $('#scrollToTop').click(function(){
+            $('html, body').animate({scrollTop : 0}, 800);
+            return false;
+        });
+        $("#scrollToBottom").unbind("click");
+        $('#scrollToBottom').click(function(){
+            $('html, body').animate({scrollTop : $(document).height()}, 800);
+            return false;
+        });
+        $(window).scroll();
+        $(".nextb").unbind("click");
+        $(".nextb").click(function() {
+            var rPos = 0; var rActive = null;
+            $(".nav .nav-item").each(function() {
+                if ($(this).find(".nav-link").hasClass("active")) {
+                    rActive = rPos;
+                }
+                if (rActive !== null && rPos > rActive && !$(this).find("a").hasClass("disabled") && $(this).is(":visible")) {
+                    $(this).find(".nav-link").trigger("click");
+                    return false;
+                }
+                rPos += 1;
+            });
+        });
+        $(".prevb").unbind("click");
+        $(".prevb").click(function() {
+            var rPos = 0; var rActive = null;
+            $($(".nav .nav-item").get().reverse()).each(function() {
+                if ($(this).find(".nav-link").hasClass("active")) {
+                    rActive = rPos;
+                }
+                if (rActive !== null && rPos > rActive && !$(this).find("a").hasClass("disabled") && $(this).is(":visible")) {
+                    $(this).find(".nav-link").trigger("click");
+                    return false;
+                }
+                rPos += 1;
+            });
+        });
+        (function($) {
+            $.fn.inputFilter = function(inputFilter) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+                    if (inputFilter(this.value)) {
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    }
+                });
+            };
+        }(jQuery));
+        $(".navigation-menu li").mouseenter(function() {
+            $(this).find(".submenu").show();
+        });
+        delParam("status");
+        $(window).on("popstate", function () {
+            if (window.rRealURL) {
+                if (window.rRealURL.split("/").reverse()[0].split("?")[0].split(".")[0] != window.location.href.split("/").reverse()[0].split("?")[0].split(".")[0]) {
+                    navigate(window.location.href.split("/").reverse()[0]);
+                }
+            }
+        });
+        $(document).keydown(function (e) {
+            if (e.keyCode == 16) {
+                window.rShiftHeld = true;
+            }
+        });
+        $(document).keyup(function (e) {
+            if (e.keyCode == 16) {
+                window.rShiftHeld = false;
+            }
+        });
+        document.onselectstart = function() {
+            if (window.rShiftHeld) {
+                return false;
+            }
+        }
+    });
+
+    rChart = null; rDates = null; rOptions = null;
+
+    $("#map").vectorMap({
+        zoomOnScroll: false,
+        map: "world_mill_en",
+        backgroundColor: "transparent",
+        regionStyle: {
+            initial: {
+                fill: "#f5f6f8"
+            }
+        },
+        series: {
+            regions: [{
+                values: {
+                    "IN": "#23b397",                    },
+                attribute: "fill"
+            }]
+        }
+    });
+    function getGraphStats(auto=true) {
+        if ((window.rCurrentPage != "dashboard") && (window.rCurrentPage != "index")) { return; }
+        var rStart = Date.now();
+        rURL = "./api?action=graph_stats";
+        $.getJSON(rURL, function(data) {
+            rDates = data.dates;
+            rCPUOptions = {
+                chart: {
+                    height: 300,
+                    type: "area",
+                    stacked: false,
+                    zoom: {
+                        enabled: false,
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                    animations: {
+                        enabled: false
+                    }
+                },
+                colors: ["#5089de", "#56c2d6", "#51b089"],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: [2],
+                    curve: "smooth"
+                },
+                series: [{
+                    name: "CPU Usage",
+                    data: data.cpu
+                },
+                    {
+                        name: "Memory Usage",
+                        data: data.memory
+                    },
+                    {
+                        name: "IO Usage",
+                        data: data.io
+                    }],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        opacityFrom: .6,
+                        opacityTo: .8
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    min: rDates[0],
+                    max: rDates[1],
+                    range: 3600000,
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            var d = new Date(timestamp);
+                            return ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2);
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value, { series, seriesIndex, dataPointIndex, w }) {
+                            return value + "%";
+                        }
+                    }
+                }
+            };
+            if (typeof(rCPUChart) != "undefined") {
+                rCPUChart.destroy();
+                rCPUChart = undefined;
+            }
+            (rCPUChart = new ApexCharts(document.querySelector("#cpu_chart"), rCPUOptions)).render();
+            rNetworkOptions = {
+                chart: {
+                    height: 300,
+                    type: "area",
+                    stacked: false,
+                    zoom: {
+                        enabled: false,
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                    animations: {
+                        enabled: false
+                    }
+                },
+                colors: ["#5089de", "#56c2d6"],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: [2],
+                    curve: "smooth"
+                },
+                series: [{
+                    name: "Input",
+                    data: data.input
+                },
+                    {
+                        name: "Output",
+                        data: data.output
+                    }],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        opacityFrom: .6,
+                        opacityTo: .8
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    min: rDates[0],
+                    max: rDates[1],
+                    range: 3600000,
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            var d = new Date(timestamp);
+                            return ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2);
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value, { series, seriesIndex, dataPointIndex, w }) {
+                            return value + " Mbps";
+                        }
+                    }
+                }
+            };
+            if (typeof(rNetworkChart) != "undefined") {
+                rNetworkChart.destroy();
+                rNetworkChart = undefined;
+            }
+            (rNetworkChart = new ApexCharts(document.querySelector("#network_chart"), rNetworkOptions)).render();
+            rConnectionsOptions = {
+                chart: {
+                    height: 300,
+                    type: "area",
+                    stacked: false,
+                    zoom: {
+                        enabled: false,
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                    animations: {
+                        enabled: false
+                    }
+                },
+                colors: ["#5089de", "#56c2d6", "#51b089"],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: [2],
+                    curve: "smooth"
+                },
+                series: [{
+                    name: "Online Streams",
+                    data: data.streams
+                },
+                    {
+                        name: "Unique Users",
+                        data: data.users
+                    },
+                    {
+                        name: "Total Connections",
+                        data: data.connections
+                    }],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        opacityFrom: .6,
+                        opacityTo: .8
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    min: rDates[0],
+                    max: rDates[1],
+                    range: 3600000,
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            var d = new Date(timestamp);
+                            return ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2);
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value, { series, seriesIndex, dataPointIndex, w }) {
+                            return value;
+                        }
+                    }
+                }
+            };
+            if (typeof(rConnectionsChart) != "undefined") {
+                rConnectionsChart.destroy();
+                rConnectionsChart = undefined;
+            }
+            (rConnectionsChart = new ApexCharts(document.querySelector("#connections_chart"), rConnectionsOptions)).render();
+            if (auto) {
+                setTimeout(getGraphStats, 60000 - (Date.now() - rStart));
+            }
+        }).fail(function() {
+            if (auto) {
+                setTimeout(getGraphStats, 60000);
+            }
+        });
+    }
+    function getStats(auto=true) {
+        if ((window.rCurrentPage != "dashboard") && (window.rCurrentPage != "index")) { return; }
+        var rStart = Date.now();
+        rURL = "./api?action=stats";
+        $.getJSON(rURL, function(data) {
+            // Open Connections
+            var rCapacity = Math.ceil((data.open_connections / data.total_connections) * 100);
+            if (isNaN(rCapacity)) { rCapacity = 0; }
+            $(".active-connections .entry").html($.number(data.open_connections, 0));
+            $(".active-connections .entry-percentage").html($.number(data.total_connections, 0));
+            $(".active-connections .progress-bar").prop("aria-valuenow", rCapacity);
+            $(".active-connections .progress-bar").css("width", rCapacity.toString() + "%");
+            $(".active-connections .sr-only").html(rCapacity.toString() + "%");
+            // Online Users
+            var rCapacity = Math.ceil((data.online_users / data.total_users) * 100);
+            if (isNaN(rCapacity)) { rCapacity = 0; }
+            $(".online-users .entry").html($.number(data.online_users, 0));
+            $(".online-users .entry-percentage").html($.number(data.total_users, 0));
+            $(".online-users .progress-bar").prop("aria-valuenow", rCapacity);
+            $(".online-users .progress-bar").css("width", rCapacity.toString() + "%");
+            $(".online-users .sr-only").html(rCapacity.toString() + "%");
+            // Network Load - Input
+            var rCapacity = Math.ceil((Math.floor(data.bytes_received / 125000) / data.network_guaranteed_speed) * 100);
+            if (isNaN(rCapacity)) { rCapacity = 0; }
+            $(".input-flow .entry").html($.number(Math.floor(data.bytes_received / 125000), 0));
+            $(".input-flow .entry-percentage").html(rCapacity.toString() + "%");
+            $(".input-flow .progress-bar").prop("aria-valuenow", rCapacity);
+            $(".input-flow .progress-bar").css("width", rCapacity.toString() + "%");
+            $(".input-flow .sr-only").html(rCapacity.toString() + "%");
+            // Network Load - Output
+            var rCapacity = Math.ceil((Math.floor(data.bytes_sent / 125000) / data.network_guaranteed_speed) * 100);
+            if (isNaN(rCapacity)) { rCapacity = 0; }
+            $(".output-flow .entry").html($.number(Math.floor(data.bytes_sent / 125000), 0));
+            $(".output-flow .entry-percentage").html(rCapacity.toString() + "%");
+            $(".output-flow .progress-bar").prop("aria-valuenow", rCapacity);
+            $(".output-flow .progress-bar").css("width", rCapacity.toString() + "%");
+            $(".output-flow .sr-only").html(rCapacity.toString() + "%");
+            // Active Streams
+            var rCapacity = Math.ceil((data.total_running_streams / (data.offline_streams + data.total_running_streams)) * 100);
+            if (isNaN(rCapacity)) { rCapacity = 0; }
+            $(".active-streams .entry").html($.number(data.total_running_streams, 0));
+            $(".active-streams .entry-percentage").html($.number(data.offline_streams, 0));
+            $(".active-streams .progress-bar").prop("aria-valuenow", rCapacity);
+            $(".active-streams .progress-bar").css("width", rCapacity.toString() + "%");
+            $(".active-streams .sr-only").html(rCapacity.toString() + "%");
+            $(".offline-streams .entry").html($.number(data.offline_streams, 0));
+            // CPU Usage
+            $(".cpu-usage .entry").html(data.cpu);
+            $(".cpu-usage .entry-percentage").html(data.cpu.toString() + "%");
+            $(".cpu-usage .progress-bar").prop("aria-valuenow", data.cpu);
+            $(".cpu-usage .progress-bar").css("width", data.cpu.toString() + "%");
+            $(".cpu-usage .sr-only").html(data.cpu.toString() + "%");
+            // Memory Usage
+            $(".mem-usage .entry").html(data.mem);
+            $(".mem-usage .entry-percentage").html(data.mem.toString() + "%");
+            $(".mem-usage .progress-bar").prop("aria-valuenow", data.mem);
+            $(".mem-usage .progress-bar").css("width", data.mem.toString() + "%");
+            $(".mem-usage .sr-only").html(data.mem.toString() + "%");
+            // Uptime
+            if (data.uptime) {
+                $(".uptime .entry").html(data.uptime.split(" ").slice(0,2).join(" "));
+            }
+            // Per Server
+            $(data.servers).each(function(i) {
+                $("#s_" + data.servers[i].server_id + "_conns").html($.number(data.servers[i].open_connections, 0));
+                $("#s_" + data.servers[i].server_id + "_users").html($.number(data.servers[i].online_users, 0));
+                $("#s_" + data.servers[i].server_id + "_online").html($.number(data.servers[i].total_running_streams, 0));
+                $("#s_" + data.servers[i].server_id + "_offline").html($.number(data.servers[i].offline_streams, 0));
+                $("#s_" + data.servers[i].server_id + "_input").html($.number(Math.floor(data.servers[i].bytes_received / 125000), 0));
+                $("#s_" + data.servers[i].server_id + "_output").html($.number(Math.floor(data.servers[i].bytes_sent / 125000), 0));
+                $("#s_" + data.servers[i].server_id + "_requests").html($.number(data.servers[i].requests_per_second, 0));
+                if (data.servers[i].uptime) {
+                    $("#s_" + data.servers[i].server_id + "_uptime").html(data.servers[i].uptime.split(" ").slice(0,2).join(" "));
+                }
+                $("#s_" + data.servers[i].server_id + "_cpu").removeClass("bg-success").removeClass("bg-danger").removeClass("bg-warning");
+                $("#s_" + data.servers[i].server_id + "_mem").removeClass("bg-success").removeClass("bg-danger").removeClass("bg-warning");
+                $("#s_" + data.servers[i].server_id + "_cpu").attr("aria-valuenow", data.servers[i].cpu);
+                $("#s_" + data.servers[i].server_id + "_cpu").css("width", data.servers[i].cpu + "%");
+                $("#s_" + data.servers[i].server_id + "_mem").attr("aria-valuenow", data.servers[i].mem);
+                $("#s_" + data.servers[i].server_id + "_mem").css("width", data.servers[i].mem + "%");
+                if (data.servers[i].server_type == 0) {
+                    $("#s_" + data.servers[i].server_id + "_io").removeClass("bg-success").removeClass("bg-danger").removeClass("bg-warning");
+                    $("#s_" + data.servers[i].server_id + "_fs").removeClass("bg-success").removeClass("bg-danger").removeClass("bg-warning");
+                    $("#s_" + data.servers[i].server_id + "_io").attr("aria-valuenow", data.servers[i].io);
+                    $("#s_" + data.servers[i].server_id + "_io").css("width", data.servers[i].io + "%");
+                    $("#s_" + data.servers[i].server_id + "_fs").attr("aria-valuenow", data.servers[i].fs);
+                    $("#s_" + data.servers[i].server_id + "_fs").css("width", data.servers[i].fs + "%");
+                }
+                if (data.servers[i].cpu > 75) {
+                    $("#s_" + data.servers[i].server_id + "_cpu").addClass("bg-danger");
+                } else if (data.servers[i].cpu > 50) {
+                    $("#s_" + data.servers[i].server_id + "_cpu").addClass("bg-warning");
+                } else {
+                    $("#s_" + data.servers[i].server_id + "_cpu").addClass("bg-success");
+                }
+                if (data.servers[i].mem > 75) {
+                    $("#s_" + data.servers[i].server_id + "_mem").addClass("bg-danger");
+                } else if (data.servers[i].mem > 50) {
+                    $("#s_" + data.servers[i].server_id + "_mem").addClass("bg-warning");
+                } else {
+                    $("#s_" + data.servers[i].server_id + "_mem").addClass("bg-success");
+                }
+                if (data.servers[i].server_type == 0) {
+                    if (data.servers[i].io > 75) {
+                        $("#s_" + data.servers[i].server_id + "_io").addClass("bg-danger");
+                    } else if (data.servers[i].io > 50) {
+                        $("#s_" + data.servers[i].server_id + "_io").addClass("bg-warning");
+                    } else {
+                        $("#s_" + data.servers[i].server_id + "_io").addClass("bg-success");
+                    }
+                    if (data.servers[i].fs > 75) {
+                        $("#s_" + data.servers[i].server_id + "_fs").addClass("bg-danger");
+                    } else if (data.servers[i].fs > 50) {
+                        $("#s_" + data.servers[i].server_id + "_fs").addClass("bg-warning");
+                    } else {
+                        $("#s_" + data.servers[i].server_id + "_fs").addClass("bg-success");
+                    }
+                }
+            });
+            if (auto) {
+                if (Date.now() - rStart < 1000) {
+                    setTimeout(getStats, 1000 - (Date.now() - rStart));
+                } else {
+                    getStats();
+                }
+            }
+        }).fail(function() {
+            if (auto) {
+                setTimeout(getStats, 1000);
+            }
+        });
+    }
+    $(document).ready(function() {
+        $('select').select2({width: '100%'});
+        getStats();
+        getGraphStats();
+        $("#server_id").change(function() {
+            if ($(this).val().length > 0) {
+                navigate("./dashboard?server_id=" + $(this).val());
+            } else {
+                navigate("./dashboard");
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        initSearch();
+    });
+</script>
+<script src="assets/js/listings.js"></script>
+</body>
+</html>
