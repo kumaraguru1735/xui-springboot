@@ -1627,20 +1627,20 @@
         });
         $(".bs-whois-modal-center").modal("show");
     }
-    function headerStats() {
-        rURL = "./api?action=header_stats";
-        $.getJSON(rURL, function(data) {
-            $("#header_connections").html($.number(data.total_connections, 0));
-            $("#header_users").html($.number(data.total_users, 0));
-            $("#header_network_up").html($.number(Math.floor(data.bytes_sent / 125000), 0));
-            $("#header_network_down").html($.number(Math.floor(data.bytes_received / 125000), 0));
-            $("#header_streams_up").html($.number(data.total_running_streams, 0));
-            $("#header_streams_down").html($.number(data.offline_streams, 0));
-            setTimeout(headerStats, 1000);
-        }).fail(function() {
-            setTimeout(headerStats, 1000);
-        });
-    }
+    // function headerStats() {
+    //     rURL = "./api?action=header_stats";
+    //     $.getJSON(rURL, function(data) {
+    //         $("#header_connections").html($.number(data.total_connections, 0));
+    //         $("#header_users").html($.number(data.total_users, 0));
+    //         $("#header_network_up").html($.number(Math.floor(data.bytes_sent / 125000), 0));
+    //         $("#header_network_down").html($.number(Math.floor(data.bytes_received / 125000), 0));
+    //         $("#header_streams_up").html($.number(data.total_running_streams, 0));
+    //         $("#header_streams_down").html($.number(data.offline_streams, 0));
+    //         setTimeout(headerStats, 1000);
+    //     }).fail(function() {
+    //         setTimeout(headerStats, 1000);
+    //     });
+    // }
     function addCredits(rID) {
         $('.creditsModal').data('id', rID);
         $("#credits_reason").val("");

@@ -13,7 +13,7 @@ data class UserGroupEntity(
     @Column(name = "group_id")
     val id: Int,
 
-    @Column(name = "group_name")
+    @Column(name = "group_name", unique = true)
     val groupName: String,
 
     @Column(name = "is_admin")

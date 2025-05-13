@@ -4,35 +4,22 @@ import com.vexora.xui.service.CustomUserDetailsService
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.session.HttpSessionEventPublisher
 
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
     private val logger = LoggerFactory.getLogger(SecurityConfig::class.java)
-
-//    @Bean
-//    fun userDetailsService(pass: PasswordEncoder): UserDetailsService {
-//        val user = User.withUsername("user")
-//            .password(pass.encode("user123"))
-//            .roles("USER")
-//            .build()
-//        val admin = User.withUsername("admin@railwire.com")
-//            .password(pass.encode("admin@123"))
-//            .roles("ADMIN")
-//            .build()
-//        return InMemoryUserDetailsManager(user, admin)
-//    }
 
     @Bean
     fun authenticationProvider(userDetailsService: CustomUserDetailsService): DaoAuthenticationProvider {
@@ -41,7 +28,6 @@ class SecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder())
         return authProvider
     }
-
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
@@ -69,6 +55,13 @@ class SecurityConfig {
                 defaultSuccessUrl("/dashboard", true)
                 failureUrl = "/login?error=true"
                 permitAll()
+            }
+
+            rememberMe {
+                key = "uniqueAndSecret"
+                tokenValiditySeconds = 86400 // 1 day
+                alwaysRemember = true
+                useSecureCookie = true
             }
 
             logout {

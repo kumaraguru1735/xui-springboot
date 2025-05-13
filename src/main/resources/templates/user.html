@@ -28,7 +28,7 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-body">
-            <form action="#" method="POST" data-parsley-validate="">
+            <form action="#" method="POST" th:object="${user}" data-parsley-validate="">
               <div id="basicwizard">
                 <ul class="nav nav-pills bg-light nav-justified form-wizard-header mb-4">
                   <li class="nav-item">
@@ -67,18 +67,20 @@
                         <div class="form-group row mb-4">
                           <label class="col-md-4 col-form-label" for="member_group_id">Member Group</label>
                           <div class="col-md-8">
-                            <select name="member_group_id" id="member_group_id" class="form-control select2" data-toggle="select2">
-                              <option></option>
-                              <option value="1">Administrators</option>
-                              <option value="2">Resellers</option>
-                            </select>
+                            <select th:field="*{groupId}" required name="member_group_id" id="member_group_id" class="form-control select2" data-toggle="select2">
+                              <option th:each="group : ${groups}"
+                                      th:value="${group}"
+                                      th:text="${group.groupName}" />
+                            </select><br/>
                           </div>
                         </div>
                         <div class="form-group row mb-4">
                           <label class="col-md-4 col-form-label" for="owner_id">Owner</label>
                           <div class="col-md-6">
-                            <select name="owner_id" id="owner_id" class="form-control select2" data-toggle="select2">
-                              <option value="1">ctndigital@gmail.com</option>
+                            <select name="owner_id" id="owner_id" th:field="*{ownerId}" class="form-control select2" data-toggle="select2">
+                              <option th:each="user : ${users}"
+                                      th:value="${user.id}"
+                                      th:text="${user.email} + ' (UserName: ' + ${user.username} + ')'" />
                             </select>
                           </div>
                           <div class="col-md-2">
@@ -1085,14 +1087,14 @@
   }
 </script>
 <script>
-  var rRealURL = undefined;
-  var jBoxes = [];
-  var rOptions = [];
-  var rSwitches = [];
-  var rRefresh = null;
-  var rProcessing = false;
-  var rSearchTop = 0;
-  var rShiftHeld = false;
+  const rRealURL = undefined;
+  const jBoxes = [];
+  const rOptions = [];
+  const rSwitches = [];
+  const rRefresh = null;
+  const rProcessing = false;
+  const rSearchTop = 0;
+  const rShiftHeld = false;
 
   window.XUI = window.XUI || {};
   window.XUI.Listings = window.XUI.Listings || {};
@@ -1121,35 +1123,6 @@
       hideAfter: 5000
     })
   }
-  function findRowByID(rTable, rColumn, rID) {
-    for (rRow in rTable.rows()[0]) {
-      if ($(rTable.row(rRow).data()[rColumn]).data("id") == rID) {
-        return rRow;
-      } else if ((rTable.row(rRow).data()[rColumn] == rID) || ($(rTable.row(rRow).data()[rColumn]).text() == rID)) {
-        return rRow;
-      }
-    }
-    return null;
-  }
-  function isValidDomain(domain) {
-    var re = new RegExp(/^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,16})$/);
-    return domain.match(re);
-  }
-  function isValidIP(rIP) {
-    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(rIP)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  function isValidDate(dateString) {
-    var regEx = /^\d{4}-\d{2}-\d{2}$/;
-    if(!dateString.match(regEx)) return false;  // Invalid format
-    var d = new Date(dateString);
-    var dNum = d.getTime();
-    if(!dNum && dNum !== 0) return false; // NaN value, Invalid date
-    return d.toISOString().slice(0,10) === dateString;
-  }
   function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode != 45 && charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -1165,17 +1138,6 @@
       }
     });
     setTimeout(pingSession, 30000);
-  }
-  function modalFingerprint(rID, rType = "stream") {
-    $(".quick_search").select2("close");
-    $("#topnav-search").removeClass("active");
-    refreshTooltips();
-    $('#mod_fingerprint_type').select2();
-    $("#mod_custom_message_div").hide();
-    $("#mod_fingerprint_type").val(1); $("#mod_font_size").val(36); $("#mod_font_color").val("#ffffff"); $("#mod_position_x").val(10); $("#mod_position_y").val(10); $("#mod_custom_message").val("");
-    $(".fingerprintModal").data("id", rID);
-    $(".fingerprintModal").data("type", rType)
-    $('.fingerprintModal').modal('show');
   }
   function setModalFingerprint() {
     rArray = {"id": $(".fingerprintModal").data("id"), "font_size": $("#mod_font_size").val(), "font_color": $("#mod_font_color").val(), "message": "", "type": $("#mod_fingerprint_type").val(), "xy_offset": ""};
@@ -1200,12 +1162,6 @@
       $.toast("Invalid fingerprint configuration. Please check that all fields are correct and try again.");
     }
     $(".fingerprintModal").modal("hide");
-  }
-  function setSwitch(switchElement, checkedBool) {
-    if((checkedBool && !switchElement.isChecked()) || (!checkedBool && switchElement.isChecked())) {
-      switchElement.setPosition(true);
-      switchElement.handleOnchange(true);
-    }
   }
   function reloadMenu() {
     $(".navigation-menu a").each(function() {
@@ -1321,9 +1277,6 @@
       window.location.href = rURL;
     });
   }
-  function reloadPage() {
-    navigate(window.location.href);
-  }
   function refreshTooltips(rModals = true) {
     if (rModals) {
       $(".jBox-wrapper").hide();
@@ -1353,42 +1306,10 @@
       window.rRealURL = rURL;
     }
   }
-  function delParams(rParams) {
-    $.each(rParams, function(rIndex, rParam) {
-      delParam(rParam);
-    });
-  }
   function delParam(rParam) {
     var rURL = new URL(document.location);
     rURL.searchParams.delete(rParam);
     setURL(rURL);
-  }
-  function setParam(rParam, rValue) {
-    var rURL = new URL(document.location);
-    rURL.searchParams.set(rParam, rValue);
-    setURL(rURL);
-  }
-  function getParam(rParam) {
-    var rURL = new URL(document.location);
-    return rURL.searchParams.get(rParam);
-  }
-  function hasParam(rParam) {
-    var rURL = new URL(document.location);
-    return rURL.searchParams.has(rParam);
-  }
-  function hasParams(rParams, rAll=false) {
-    var rURL = new URL(document.location);
-    var rCount = 0;
-    $.each(rParams, function(rIndex, rParam) {
-      if (rURL.searchParams.has(rParam)) {
-        rCount += 1;
-      }
-    });
-    if (((rCount > 0) && (!rAll)) || (rCount == rParams.length)) {
-      return true;
-    } else {
-      return false;
-    }
   }
   function bindHref() {
     $("a").each(function() {
@@ -1399,67 +1320,6 @@
           e.preventDefault();
         });
       }
-    });
-  }
-  function whois(rIP) {
-    $("#whoisLabel").html(rIP);
-    var rRows = $("#whois-table tr");
-    $(rRows).each(function() {
-      $(this).find("td").html("");
-    });
-    $.getJSON("./api?action=ip_whois&isp=1&ip=" + encodeURIComponent(rIP), function(rData) {
-      if ("data" in rData) {
-        if (("continent" in rData.data) && ("names" in rData.data.continent) && ("en" in rData.data.continent.names)) {
-          $(rRows[1]).find("td").html(rData.data.continent.names.en);
-        }
-        if (("country" in rData.data) && ("names" in rData.data.country) && ("en" in rData.data.country.names)) {
-          $(rRows[2]).find("td").html(rData.data.country.names.en);
-        }
-        if (("city" in rData.data) && ("names" in rData.data.city) && ("en" in rData.data.city.names)) {
-          $(rRows[3]).find("td").html(rData.data.city.names.en);
-        }
-        if (("postal" in rData.data) && ("code" in rData.data.postal)) {
-          $(rRows[4]).find("td").html(rData.data.postal.code);
-        }
-        if (("location" in rData.data) && ("latitude" in rData.data.location) && ("longitude" in rData.data.location)) {
-          $(rRows[5]).find("td").html(rData.data.location.latitude + ", " + rData.data.location.longitude);
-        }
-        if (("isp" in rData.data) && (rData.data.isp)) {
-          if ("isp" in rData.data.isp) {
-            $(rRows[7]).find("td").html(rData.data.isp.isp);
-          }
-          if ("organization" in rData.data.isp) {
-            $(rRows[8]).find("td").html(rData.data.isp.organization);
-          }
-          if (("autonomous_system_number" in rData.data.isp) && ("autonomous_system_organization" in rData.data.isp)) {
-            $(rRows[9]).find("td").html("AS" + rData.data.isp.autonomous_system_number.toString() + " - " + rData.data.isp.autonomous_system_organization);
-          }
-          if (rData.data.type) {
-            $(rRows[10]).find("td").html(rData.data.type.toUpperCase());
-          }
-        }
-        if (("location" in rData.data) && ("time_zone" in rData.data.location)) {
-          $(rRows[12]).find("td").html(rData.data.location.time_zone);
-        }
-        if (("location" in rData.data) && ("time" in rData.data.location)) {
-          $(rRows[13]).find("td").html(rData.data.location.time);
-        }
-      }
-    });
-    $(".bs-whois-modal-center").modal("show");
-  }
-  function headerStats() {
-    rURL = "./api?action=header_stats";
-    $.getJSON(rURL, function(data) {
-      $("#header_connections").html($.number(data.total_connections, 0));
-      $("#header_users").html($.number(data.total_users, 0));
-      $("#header_network_up").html($.number(Math.floor(data.bytes_sent / 125000), 0));
-      $("#header_network_down").html($.number(Math.floor(data.bytes_received / 125000), 0));
-      $("#header_streams_up").html($.number(data.total_running_streams, 0));
-      $("#header_streams_down").html($.number(data.offline_streams, 0));
-      setTimeout(headerStats, 1000);
-    }).fail(function() {
-      setTimeout(headerStats, 1000);
     });
   }
   function addCredits(rID) {
@@ -1638,12 +1498,6 @@
         });
       }
     }
-  }
-  function editModal(rEvent, rType, rID, rTitle) {
-    if (rEvent) {
-      rEvent.preventDefault();
-    }
-    eModal.iframe(rType + '?id=' + rID + '&modal=1', rTitle);
   }
   function closeEditModal(){
     $('.modal').modal('hide');
@@ -1894,6 +1748,6 @@
     initSearch();
   });
 </script>
-<script src="assets/js/listings.js"></script>
+<script th:src="@{/assets/js/listings.js}"></script>
 </body>
 </html>

@@ -10,11 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
+import java.io.Serializable
 
 @Service
 class CustomUserDetailsService(
     private val userRepository: UserRepository
-) : UserDetailsService{
+) : UserDetailsService, Serializable {
     private val logger = LoggerFactory.getLogger(UserController::class.java)
 
     override fun loadUserByUsername(username: String): UserDetails? {

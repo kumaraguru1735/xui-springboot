@@ -23,16 +23,16 @@ class GlobalController {
         return "dashboard"
     }
 
-    @GetMapping("/user")
-    fun user(model: Model): String {
-        model.addAttribute("title", "XUI | User")
-        return "user"
-    }
-
-
-    @GetMapping("/users")
-    fun users(model: Model): String {
-        model.addAttribute("title", "XUI | Users")
-        return "users"
-    }
+//    @GetMapping("/user")
+//    fun user(model: Model): String {
+//        model.addAttribute("title", "XUI | User")
+//        return "user"
+//    }
+//
+//
+//    @GetMapping("/users")
+//    fun users(model: Model): String {
+//        model.addAttribute("title", "XUI | Users")
+//        return "users"
+//    }
 }
