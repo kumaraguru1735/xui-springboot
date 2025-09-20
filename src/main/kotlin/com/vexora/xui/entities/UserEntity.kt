@@ -13,7 +13,7 @@ open class UserEntity(
     @Column(name = "id")
     open val id: Int = 0,
 
-    @Column(name = "username", length = 50)
+    @Column(name = "username", length = 50, unique = true)
     @field:NotBlank(message = "Username is required")
     @field:Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     open var username: String? = null,
@@ -37,19 +37,19 @@ open class UserEntity(
     open var lastLogin: Int? = null,
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_group_id")
+    @JoinColumn(name = "member_group_id", nullable = false)
     @field:NotNull(message = "Member group is required")
     open var groupId: UserGroupEntity? = null,
 
-    @Column(name = "credits")
-    @field:Min(value = 0, message = "Credits cannot be negative")
+    @Column(name = "credits", nullable = false)
+    @field:DecimalMin(value = "0.0", message = "Credits cannot be negative")
     open var credits: Float = 0f,
 
     @Lob
     @Column(name = "notes", columnDefinition = "MEDIUMTEXT")
     open var notes: String? = null,
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     open var status: Int = 1,
 
     @Lob
@@ -57,7 +57,7 @@ open class UserEntity(
     open var resellerDns: String? = null,
 
     @Column(name = "owner_id")
-    open var ownerId: Int = 0,
+    open var ownerId: Int? = null, // Changed default from 1 to null
 
     @Lob
     @Column(name = "override_packages", columnDefinition = "TEXT")
@@ -66,13 +66,28 @@ open class UserEntity(
     @Column(name = "hue")
     open var hue: String? = null,
 
-    @Column(name = "theme")
+    @Column(name = "theme", nullable = false)
     open var theme: Int = 0,
 
     @Column(name = "timezone")
     open var timezone: String? = null,
 
-    @Column(name = "api_key", length = 64)
+    @Column(name = "api_key", length = 64, unique = true)
     open var apiKey: String? = null
 
-) : Serializable
+) : Serializable {
+
+    override fun toString(): String {
+        return "UserEntity(id=$id, username='$username', email='$email')"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is UserEntity) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+}

@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserGroupRepository : JpaRepository<UserGroupEntity, Int>{
+    fun findById(id: UserGroupEntity): UserGroupEntity?
 
 }
