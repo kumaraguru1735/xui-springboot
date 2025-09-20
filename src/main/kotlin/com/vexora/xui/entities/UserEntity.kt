@@ -1,15 +1,7 @@
 package com.vexora.xui.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.Lob
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
+import jakarta.persistence.*
+import jakarta.validation.constraints.*
 import java.io.Serializable
 
 @Entity
@@ -22,12 +14,17 @@ open class UserEntity(
     open val id: Int = 0,
 
     @Column(name = "username", length = 50)
+    @field:NotBlank(message = "Username is required")
+    @field:Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     open var username: String? = null,
 
     @Column(name = "password", length = 255)
+    @field:NotBlank(message = "Password is required")
+    @field:Size(min = 6, message = "Password must be at least 6 characters")
     open var password: String? = null,
 
     @Column(name = "email", length = 255)
+    @field:Email(message = "Invalid email format")
     open var email: String? = null,
 
     @Column(name = "ip", length = 255)
@@ -41,9 +38,11 @@ open class UserEntity(
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_group_id")
+    @field:NotNull(message = "Member group is required")
     open var groupId: UserGroupEntity? = null,
 
     @Column(name = "credits")
+    @field:Min(value = 0, message = "Credits cannot be negative")
     open var credits: Float = 0f,
 
     @Lob
