@@ -6,22 +6,34 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.io.Serializable
+import java.sql.Timestamp
 
 @Entity
 @Table(name = "watch_logs")
-data class WatchLog(
+open class WatchLog(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @Column(name = "id")
+    open val id: Long = 0,
 
-    var type: Int = 0,
+    @Column(name = "type")
+    open var type: Int = 0,
+
     @Column(name = "server_id")
-    var serverId: Int = 0,
-    var filename: String? = null,
-    var status: Int = 0,
+    open var serverId: Int = 0,
+
+    @Column(name = "filename")
+    open var filename: String? = null,
+
+    @Column(name = "status")
+    open var status: Int = 0,
+
     @Column(name = "stream_id")
-    var streamId: Int = 0,
+    open var streamId: Int = 0,
 
     @Column(name = "dateadded")
-    var dateAdded: java.sql.Timestamp? = null
-)
+    open var dateAdded: Timestamp? = null
+
+) : Serializable

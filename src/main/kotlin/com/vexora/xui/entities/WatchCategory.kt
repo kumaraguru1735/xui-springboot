@@ -6,19 +6,29 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.io.Serializable
 
 @Entity
 @Table(name = "watch_categories")
-data class WatchCategory(
+open class WatchCategory(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    open val id: Long = 0,
 
-    var type: Int = 0,
+    @Column(name = "type")
+    open var type: Int = 0,
+
     @Column(name = "genre_id")
-    var genreId: Int = 0,
-    var genre: String? = null,
+    open var genreId: Int = 0,
+
+    @Column(name = "genre")
+    open var genre: String? = null,
+
     @Column(name = "category_id")
-    var categoryId: Int = 0,
-    var bouquets: String? = null
-)
+    open var categoryId: Int = 0,
+
+    @Column(name = "bouquets")
+    open var bouquets: String? = null
+
+) : Serializable
+

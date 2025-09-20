@@ -5,71 +5,72 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.io.Serializable
-
 @Entity
 @Table(name = "users_groups")
-data class UserGroupEntity(
+open class UserGroupEntity(
+
     @Id
     @Column(name = "group_id")
-    val id: Int,
+    open val id: Int,
 
     @Column(name = "group_name", unique = true)
-    val groupName: String,
+    open val groupName: String,
 
     @Column(name = "is_admin")
-    val isAdmin: Boolean,
+    open val isAdmin: Boolean,
 
     @Column(name = "is_reseller")
-    val isReseller: Boolean,
+    open val isReseller: Boolean,
 
     @Column(name = "total_allowed_gen_trials")
-    val totalAllowedGenTrials: Int,
+    open val totalAllowedGenTrials: Int,
 
     @Column(name = "total_allowed_gen_in")
-    val totalAllowedGenIn: String,
+    open val totalAllowedGenIn: String,
 
     @Column(name = "delete_users")
-    val deleteUsers: Boolean,
+    open val deleteUsers: Boolean,
 
     @Column(name = "allowed_pages", columnDefinition = "TEXT")
-    val allowedPages: String,
+    open val allowedPages: String,
 
     @Column(name = "can_delete")
-    val canDelete: Boolean,
+    open val canDelete: Boolean,
 
     @Column(name = "create_sub_resellers")
-    val createSubResellers: Boolean,
+    open val createSubResellers: Boolean,
 
     @Column(name = "create_sub_resellers_price")
-    val createSubResellersPrice: Int,
+    open val createSubResellersPrice: Int,
 
     @Column(name = "reseller_client_connection_logs")
-    val resellerClientConnectionLogs: Boolean,
+    open val resellerClientConnectionLogs: Boolean,
 
     @Column(name = "can_view_vod")
-    val canViewVod: Boolean,
+    open val canViewVod: Boolean,
 
     @Column(name = "allow_download")
-    val allowDownload: Boolean,
+    open val allowDownload: Boolean,
 
     @Column(name = "minimum_trial_credits")
-    val minimumTrialCredits: Int,
+    open val minimumTrialCredits: Int,
 
     @Column(name = "allow_restrictions")
-    val allowRestrictions: Boolean,
+    open val allowRestrictions: Boolean,
 
     @Column(name = "allow_change_username")
-    val allowChangeUsername: Boolean,
+    open val allowChangeUsername: Boolean,
 
     @Column(name = "allow_change_password")
-    val allowChangePassword: Boolean,
+    open val allowChangePassword: Boolean,
 
     @Column(name = "minimum_username_length")
-    val minimumUsernameLength: Int,
+    open val minimumUsernameLength: Int,
 
     @Column(name = "minimum_password_length")
-    val minimumPasswordLength: Int,
+    open val minimumPasswordLength: Int,
 
     @Column(name = "allow_change_bouquets")
-    val allowChangeBouquets: Boolean = true,
-)  : Serializable
+    open val allowChangeBouquets: Boolean = true
+
+) : Serializable

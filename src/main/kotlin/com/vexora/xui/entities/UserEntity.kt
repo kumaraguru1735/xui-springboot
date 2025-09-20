@@ -12,60 +12,68 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.io.Serializable
 
-
 @Entity
 @Table(name = "users")
-data class UserEntity(
+open class UserEntity(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id")
+    open val id: Int = 0,
 
-    @Column(length = 50)
-    var username: String? = null,
+    @Column(name = "username", length = 50)
+    open var username: String? = null,
 
-    @Column(length = 255)
-    var password: String? = null,
+    @Column(name = "password", length = 255)
+    open var password: String? = null,
 
-    @Column(length = 255)
-    var email: String? = null,
+    @Column(name = "email", length = 255)
+    open var email: String? = null,
 
-    @Column(length = 255)
-    var ip: String? = null,
+    @Column(name = "ip", length = 255)
+    open var ip: String? = null,
 
     @Column(name = "date_registered")
-    var dateRegistered: Int? = null,
+    open var dateRegistered: Int? = null,
 
     @Column(name = "last_login")
-    var lastLogin: Int? = null,
+    open var lastLogin: Int? = null,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_group_id")
-    var groupId: UserGroupEntity? = null,
+    open var groupId: UserGroupEntity? = null,
 
-    var credits: Float = 0f,
+    @Column(name = "credits")
+    open var credits: Float = 0f,
 
     @Lob
-    @Column(columnDefinition = "MEDIUMTEXT")
-    var notes: String? = null,
+    @Column(name = "notes", columnDefinition = "MEDIUMTEXT")
+    open var notes: String? = null,
 
-    var status: Int = 1,
+    @Column(name = "status")
+    open var status: Int = 1,
 
     @Lob
     @Column(name = "reseller_dns", columnDefinition = "MEDIUMTEXT")
-    var resellerDns: String? = null,
+    open var resellerDns: String? = null,
 
     @Column(name = "owner_id")
-    var ownerId: Int = 0,
+    open var ownerId: Int = 0,
 
+    @Lob
     @Column(name = "override_packages", columnDefinition = "TEXT")
-    var overridePackages: String? = null,
+    open var overridePackages: String? = null,
 
-    var hue: String? = null,
+    @Column(name = "hue")
+    open var hue: String? = null,
 
-    var theme: Int = 0,
+    @Column(name = "theme")
+    open var theme: Int = 0,
 
-    var timezone: String? = null,
+    @Column(name = "timezone")
+    open var timezone: String? = null,
 
     @Column(name = "api_key", length = 64)
-    var apiKey: String? = null
-)  : Serializable
+    open var apiKey: String? = null
+
+) : Serializable

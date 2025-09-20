@@ -1,24 +1,31 @@
-package com.vexora.xui.entities
-
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.io.Serializable
+import java.sql.Timestamp
 
 @Entity
 @Table(name = "watch_refresh")
-data class WatchRefresh(
+open class WatchRefresh(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @Column(name = "id")
+    open val id: Long = 0,
 
-    var type: Int = 0,
+    @Column(name = "type")
+    open var type: Int = 0,
+
     @Column(name = "stream_id")
-    var streamId: Int = 0,
-    var status: Int = 0,
+    open var streamId: Int = 0,
+
+    @Column(name = "status")
+    open var status: Int = 0,
 
     @Column(name = "dateadded")
-    var dateAdded: java.sql.Timestamp? = null
-)
+    open var dateAdded: Timestamp? = null
+
+) : Serializable

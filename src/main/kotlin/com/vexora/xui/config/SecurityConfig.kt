@@ -58,7 +58,7 @@ class SecurityConfig {
             }
 
             rememberMe {
-                key = "uniqueAndSecret"
+                key = "XUIONE_s3cR3t_JWT_4pp_k9tP6rYdB8q2MvZxF1gLwH7jCa5eR0n"
                 tokenValiditySeconds = 86400 // 1 day
                 alwaysRemember = true
                 useSecureCookie = true

@@ -6,18 +6,28 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.io.Serializable
+import java.sql.Timestamp
 
 @Entity
 @Table(name = "users_subreseller")
-data class UserSubreseller(
+open class UserSubreseller(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @Column(name = "id")
+    open val id: Long = 0,
 
-    var reseller: Int = 0,
-    var subreseller: Int = 0,
-    var status: Int = 1,
+    @Column(name = "reseller")
+    open var reseller: Int = 0,
+
+    @Column(name = "subreseller")
+    open var subreseller: Int = 0,
+
+    @Column(name = "status")
+    open var status: Int = 1,
 
     @Column(name = "dateadded")
-    var dateAdded: java.sql.Timestamp? = null
-)
+    open var dateAdded: Timestamp? = null
+
+) : Serializable
