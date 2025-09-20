@@ -2,6 +2,7 @@ package com.vexora.xui.config
 
 import com.vexora.xui.service.CustomUserDetailsService
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -18,7 +19,9 @@ import org.springframework.security.web.session.HttpSessionEventPublisher
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig {
+class SecurityConfig(
+    @param:Value("\${security.remember-me.key}") private val rememberMeKey: String
+) {
     private val logger = LoggerFactory.getLogger(SecurityConfig::class.java)
 
     @Bean
@@ -58,7 +61,7 @@ class SecurityConfig {
             }
 
             rememberMe {
-                key = "XUIONE_s3cR3t_JWT_4pp_k9tP6rYdB8q2MvZxF1gLwH7jCa5eR0n"
+                key = rememberMeKey
                 tokenValiditySeconds = 86400 // 1 day
                 alwaysRemember = true
                 useSecureCookie = true
